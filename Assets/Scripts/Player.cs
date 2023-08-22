@@ -8,6 +8,8 @@ public class Player : MonoBehaviour
 {
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider;
+    private SpriteRenderer spriteRenderer;
+    private Animator anim;
     private PlayerInput playerInput;
     private Vector2 input;
 
@@ -21,6 +23,7 @@ public class Player : MonoBehaviour
     [Header("Jump")]
     [SerializeField] private float timeJumpSaved;
     [SerializeField] private float coyoteTime;
+    private bool falling;
     private bool saveJump;
     private bool inCoyoteTime;
     private bool canJump;
@@ -29,6 +32,8 @@ public class Player : MonoBehaviour
     {
         rb = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
+        spriteRenderer = GetComponent<SpriteRenderer>();
+        anim = GetComponent<Animator>();
         playerInput = GetComponent<PlayerInput>();
     }
 
@@ -46,6 +51,12 @@ public class Player : MonoBehaviour
                 saveJump = false;
                 Jump();
             }
+
+            if (falling)
+            {
+                falling = false;
+                anim.SetTrigger("Arrive");
+            }
         }
         else
         {
@@ -53,6 +64,12 @@ public class Player : MonoBehaviour
             {
                 inCoyoteTime = true;
                 StartCoroutine(CoyoteTime());
+            }
+
+            if (rb.velocity.y < 0 && falling == false)
+            {
+                falling = true;
+                anim.SetTrigger("Fall");
             }
         }
     }
@@ -74,6 +91,16 @@ public class Player : MonoBehaviour
         //rb.AddForce(new Vector2(input.x * runSpeed, 0));
         Vector3 velocidadFinal = new Vector2(input.x * runSpeed, rb.velocity.y);
         rb.velocity = Vector3.SmoothDamp(rb.velocity, velocidadFinal, ref _velocidadZero, smothing);
+
+        if (input.x < 0)
+            spriteRenderer.flipX = true;
+        else if (input.x > 0)
+            spriteRenderer.flipX = false;
+
+        if (input.x != 0 && canJump)
+            anim.SetBool("Walk", true);
+        else
+            anim.SetBool("Walk", false);
     }
 
     // Este salto se llama desde el Input System
@@ -85,6 +112,7 @@ public class Player : MonoBehaviour
             Debug.Log("Saltar");
             rb.velocity = new Vector2(rb.velocity.x, 0f);
             rb.AddForce(new Vector2(0, jumpHeight));
+            anim.SetTrigger("Jump");
         }
         else if (callbackContext.performed && !canJump)
         {
@@ -98,6 +126,7 @@ public class Player : MonoBehaviour
         Debug.Log("Salto guardado");
         rb.velocity = new Vector2(rb.velocity.x, 0f);
         rb.AddForce(new Vector2(0, jumpHeight));
+        anim.SetTrigger("Jump");
     }
 
     // Guarda el salto por si el jugador presiona saltar justo antes de tocar el suelo
