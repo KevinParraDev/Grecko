@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEditor.UIElements;
 using UnityEngine;
 using UnityEngine.InputSystem;
@@ -129,8 +130,26 @@ public class Player : MonoBehaviour
         anim.SetTrigger("Jump");
     }
 
-    // Guarda el salto por si el jugador presiona saltar justo antes de tocar el suelo
-    IEnumerator SaveJump()
+     // Para comprobar si esta en una plataforma movible
+     public void OnCollisionEnter2D(Collision2D collision)
+     {
+          if (collision.transform.CompareTag("MovingPlatform"))
+          {
+               transform.parent = collision.transform;
+          }
+     }
+
+     // Para comprobar si ya no esta en plataforma movible
+     public void OnCollisionExit2D(Collision2D collision)
+     {
+          if (collision.transform.CompareTag("MovingPlatform"))
+          {
+               transform.parent = null;
+          }
+     }
+
+     // Guarda el salto por si el jugador presiona saltar justo antes de tocar el suelo
+     IEnumerator SaveJump()
     {
         saveJump = true;
         yield return new WaitForSeconds(timeJumpSaved);
