@@ -14,6 +14,8 @@ public class Player : MonoBehaviour
     private PlayerInput playerInput;
     private Vector2 input;
 
+    [SerializeField] private CompositeCollider2D platformCollider;
+
     [Header("Movement")]
     [SerializeField] private float runSpeed;
     [SerializeField] private float jumpHeight;
@@ -71,6 +73,17 @@ public class Player : MonoBehaviour
             {
                 falling = true;
                 anim.SetTrigger("Fall");
+            }
+
+            if (rb.velocity.y > 0 && platformCollider.isTrigger == false)
+            {
+                Debug.Log("Desactivar collider");
+                platformCollider.isTrigger = true;
+            }
+            else if (rb.velocity.y <= 0 && platformCollider.isTrigger == true)
+            {
+                Debug.Log("Activar collider");
+                platformCollider.isTrigger = false;
             }
         }
     }
@@ -130,26 +143,26 @@ public class Player : MonoBehaviour
         anim.SetTrigger("Jump");
     }
 
-     // Para comprobar si esta en una plataforma movible
-     public void OnCollisionEnter2D(Collision2D collision)
-     {
-          if (collision.transform.CompareTag("MovingPlatform"))
-          {
-               transform.parent = collision.transform;
-          }
-     }
+    // Para comprobar si esta en una plataforma movible
+    public void OnCollisionEnter2D(Collision2D collision)
+    {
+        if (collision.transform.CompareTag("MovingPlatform"))
+        {
+            transform.parent = collision.transform;
+        }
+    }
 
-     // Para comprobar si ya no esta en plataforma movible
-     public void OnCollisionExit2D(Collision2D collision)
-     {
-          if (collision.transform.CompareTag("MovingPlatform"))
-          {
-               transform.parent = null;
-          }
-     }
+    // Para comprobar si ya no esta en plataforma movible
+    public void OnCollisionExit2D(Collision2D collision)
+    {
+        if (collision.transform.CompareTag("MovingPlatform"))
+        {
+            transform.parent = null;
+        }
+    }
 
-     // Guarda el salto por si el jugador presiona saltar justo antes de tocar el suelo
-     IEnumerator SaveJump()
+    // Guarda el salto por si el jugador presiona saltar justo antes de tocar el suelo
+    IEnumerator SaveJump()
     {
         saveJump = true;
         yield return new WaitForSeconds(timeJumpSaved);
