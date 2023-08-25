@@ -22,6 +22,7 @@ public class Player : MonoBehaviour
     [Range(0, 0.3f)] public float smothing;
     [SerializeField] LayerMask groundMask;
     private Vector3 _velocidadZero = Vector3.zero;
+    private bool canMove = true;
 
     [Header("Jump")]
     [SerializeField] private float timeJumpSaved;
@@ -90,7 +91,8 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        Move();
+        if (canMove)
+            Move();
     }
 
     // Detecta si el jugador está tocando el suelo
@@ -115,6 +117,11 @@ public class Player : MonoBehaviour
             anim.SetBool("Walk", true);
         else
             anim.SetBool("Walk", false);
+    }
+
+    public void DisableMotion(bool e)
+    {
+        canMove = e;
     }
 
     // Este salto se llama desde el Input System
