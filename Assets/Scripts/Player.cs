@@ -64,6 +64,7 @@ public class Player : MonoBehaviour
         }
         else
         {
+            Debug.Log("No suelo");
             if (!inCoyoteTime)
             {
                 inCoyoteTime = true;
@@ -76,12 +77,12 @@ public class Player : MonoBehaviour
                 anim.SetTrigger("Fall");
             }
 
-            if (rb.velocity.y > 0 && platformCollider.isTrigger == false)
+            if (rb.velocity.y > 0)
             {
                 Debug.Log("Desactivar collider");
                 platformCollider.isTrigger = true;
             }
-            else if (rb.velocity.y <= 0 && platformCollider.isTrigger == true)
+            else if (rb.velocity.y <= 0)
             {
                 Debug.Log("Activar collider");
                 platformCollider.isTrigger = false;
