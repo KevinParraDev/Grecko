@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using Unity.VisualScripting;
 using UnityEngine;
 
 public class Bullet : Killer
@@ -29,17 +30,20 @@ public class Bullet : Killer
 
      private void CheckCollision(Vector3 movement)
      {
-          RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, movement.magnitude, _collisionMask);
+          RaycastHit2D hit = Physics2D.Raycast(transform.position, transform.up, movement.magnitude * 2, _collisionMask);
 
           if (hit.collider != null)
           {
-               if (hit.transform.CompareTag("Player"))
-               {
-                    KillPlayer();
-               }
+               DestroyBullet();
+          }
+     }
 
-               // TODO: Activación de la animación de impacto de la bala
-
+     private void OnTriggerEnter2D(Collider2D collision)
+     {
+          // Es mejor usar un trigger collider para matar al player
+          if (collision.transform.CompareTag("Player"))
+          {
+               KillPlayer();
                DestroyBullet();
           }
      }

@@ -154,7 +154,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   _collisionMask:
     serializedVersion: 2
-    m_Bits: 192
+    m_Bits: 64
 --- !u!50 &461415674401493541
 Rigidbody2D:
   serializedVersion: 4
@@ -186,7 +186,7 @@ CircleCollider2D:
   m_Enabled: 1
   m_Density: 1
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_UsedByEffector: 0
   m_UsedByComposite: 0
   m_Offset: {x: 0, y: 0.2}
