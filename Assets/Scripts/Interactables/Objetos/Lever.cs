@@ -11,7 +11,7 @@ public class Lever : InteractableObject
      private Transform _leverStick;
 
      [SerializeField]
-     private GameObject _objectToActive;
+     private List<GameObject> _objectsToActive;
 
      // Para la animacion
      private bool _isInAnimation = false;
@@ -20,26 +20,34 @@ public class Lever : InteractableObject
 
      public override void Interact()
     {
-          if (_objectToActive != null && !_isInAnimation)
+          if (_objectsToActive.Count > 0 && !_isInAnimation)
           {
-               // Si no esta activo se activa con el elemento y viceversa
-               if (!_active)
+               foreach (GameObject obj in _objectsToActive)
                {
-                    if (_objectToActive.TryGetComponent(out IActivable _elementToActive))
-                         _elementToActive.Activate();
-                    _active = true;
+                    ActivateObject(obj);
+               }    
+          }
+     }
 
-                    StartCoroutine(RotateLever());
-               }
-               else
-               {
-                    if (_objectToActive.TryGetComponent(out IActivable _elementToActive))
-                         _elementToActive.Deactivate();
+     private void ActivateObject(GameObject obj)
+     {
+          // Si no esta activo se activa con el elemento y viceversa
+          if (!_active)
+          {
+               if (obj.TryGetComponent(out IActivable _elementToActive))
+                    _elementToActive.Activate();
+               _active = true;
 
-                    _active = false;
+               StartCoroutine(RotateLever());
+          }
+          else
+          {
+               if (obj.TryGetComponent(out IActivable _elementToActive))
+                    _elementToActive.Deactivate();
 
-                    StartCoroutine(RotateLever());
-               }
+               _active = false;
+
+               StartCoroutine(RotateLever());
           }
      }
 

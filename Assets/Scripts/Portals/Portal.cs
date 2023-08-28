@@ -19,9 +19,14 @@ public class Portal : MonoBehaviour
           // Discutir como queremos lo de la ejeccion en cierta direccion
           if (objTransform.CompareTag("Bullet")){
                objRigidBody.velocity = objRigidBody.velocity.magnitude * _destiny.transform.up;
+               objTransform.SetPositionAndRotation(_destiny.transform.position, _destiny.transform.rotation);
+          }
+          else
+          {
+               objRigidBody.velocity = _destiny.transform.up * _ejectionSpeed;
           }
 
-          objRigidBody.velocity = _destiny.transform.up * _ejectionSpeed;
+          
 
      }
 
@@ -32,4 +37,5 @@ public class Portal : MonoBehaviour
                Teleport(collision.transform, collision.attachedRigidbody);
           }
      }
+
 }
