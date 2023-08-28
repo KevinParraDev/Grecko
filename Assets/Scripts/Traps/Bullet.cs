@@ -15,7 +15,7 @@ public class Bullet : Killer
 
      private void Start()
      {
-          _anim = GetComponent<Animator>();
+          _anim = GetComponentInChildren<Animator>();
      }
 
      private void FixedUpdate()
@@ -46,11 +46,20 @@ public class Bullet : Killer
 
      private void DestroyBullet()
      {
+          speed = 0f;
+          // queda disponible en el Pool
+          StartCoroutine(DestroyOnDelay());
+     }
+
+     IEnumerator DestroyOnDelay()
+     {
           if (_anim != null)
           {
-               _anim.SetTrigger("Destroy");
+               _anim.SetTrigger("Explode");
           }
-          // queda disponible en el Pool
+          float duracionAnimacion = _anim.GetCurrentAnimatorStateInfo(0).length - 0.5f;
+          yield return new WaitForSeconds(duracionAnimacion);
+
           gameObject.SetActive(false);
      }
 }
