@@ -22,33 +22,45 @@ public class Lever : InteractableObject
     {
           if (_objectsToActive.Count > 0 && !_isInAnimation)
           {
-               foreach (GameObject obj in _objectsToActive)
+               // Si no esta activo se activa con los elemento y viceversa
+
+               if (!_active)
                {
-                    ActivateObject(obj);
-               }    
+                    foreach (GameObject obj in _objectsToActive)
+                    {
+                         ActivateObject(obj);
+                    }
+
+                    _active = true;
+                    StartCoroutine(RotateLever());
+               }
+               else
+               {
+                    foreach (GameObject obj in _objectsToActive)
+                    {
+                         DeactiveObject(obj);
+                    }
+
+                    _active = false;
+                    StartCoroutine(RotateLever());
+               }
+                      
           }
      }
 
      private void ActivateObject(GameObject obj)
      {
-          // Si no esta activo se activa con el elemento y viceversa
-          if (!_active)
-          {
-               if (obj.TryGetComponent(out IActivable _elementToActive))
-                    _elementToActive.Activate();
-               _active = true;
+          
+          if (obj.TryGetComponent(out IActivable _elementToActive))
+               _elementToActive.Activate();
+           
+          
+     }
 
-               StartCoroutine(RotateLever());
-          }
-          else
-          {
-               if (obj.TryGetComponent(out IActivable _elementToActive))
-                    _elementToActive.Deactivate();
-
-               _active = false;
-
-               StartCoroutine(RotateLever());
-          }
+     private void DeactiveObject(GameObject obj)
+     {
+          if (obj.TryGetComponent(out IActivable _elementToActive))
+               _elementToActive.Deactivate();
      }
 
     // Corrutina para animar la rotacion de la palanca
@@ -59,7 +71,6 @@ public class Lever : InteractableObject
           float elapsedTime = 0f;
           float rotationTime = 0.3f; // Duracion de la rotacion
 
-          // Animacion de ataque a melee
           while (elapsedTime < rotationTime)
           {
                elapsedTime += Time.deltaTime;

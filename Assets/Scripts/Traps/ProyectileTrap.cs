@@ -76,17 +76,20 @@ public class ProyectileTrap : MonoBehaviour, IActivable
           _TrapIsActive = false;
      }
 
-     private void OnTriggerEnter2D(Collider2D collision)
-     {
-          if (collision.CompareTag("Player")){
-               Activate();
-          } 
-     }
+     // Esto seria interesante activarlas con un area de trigger pero choca un poco al ser objetos activables tambien
+     // Se puede implementar los dos tipos pero de momento derjare las activables o las que ya estan activas directamente
 
-     private void OnTriggerExit2D(Collider2D collision)
-     {
-          if (collision.CompareTag("Player")){
-               Deactivate();
-          }
-     }
+     //private void OnTriggerEnter2D(Collider2D collision)
+     //{
+     //     if (collision.CompareTag("Player")){
+     //          Activate();
+     //     } 
+     //}
+
+     //private void OnTriggerExit2D(Collider2D collision)
+     //{
+     //     if (collision.CompareTag("Player")){
+     //          Deactivate();
+     //     }
+     //}
 }
