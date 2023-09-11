@@ -12,6 +12,7 @@ public class Player : MonoBehaviour
     private CheckpointManager checkpointManager;
     private Animator anim;
     private PlayerInput playerInput;
+    private Tongue tongue;
     private Vector2 input;
     private bool alive = true;
 
@@ -41,6 +42,7 @@ public class Player : MonoBehaviour
         anim = GetComponent<Animator>();
         playerInput = GetComponent<PlayerInput>();
         checkpointManager = GetComponent<CheckpointManager>();
+        tongue = GetComponentInChildren<Tongue>();
     }
 
     private void Update()
@@ -109,14 +111,20 @@ public class Player : MonoBehaviour
         rb.velocity = Vector3.SmoothDamp(rb.velocity, velocidadFinal, ref _velocidadZero, smothing);
 
         if (input.x < 0)
-            spriteRenderer.flipX = true;
+            Turn(true);
         else if (input.x > 0)
-            spriteRenderer.flipX = false;
+            Turn(false);
 
         if (input.x != 0 && canJump)
             anim.SetBool("Walk", true);
         else
             anim.SetBool("Walk", false);
+    }
+
+    public void Turn(bool lookAtRight)
+    {
+        spriteRenderer.flipX = lookAtRight;
+        tongue.SetInitialPosition(lookAtRight);
     }
 
     public void DisableMotion(bool e)

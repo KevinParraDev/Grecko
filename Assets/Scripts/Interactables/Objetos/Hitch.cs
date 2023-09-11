@@ -15,6 +15,12 @@ public class Hitch : InteractableObject
     {
         Debug.Log("Lazo");
         Vector2 hitchPos = transform.position;
+
+        if (playerGO.transform.position.x <= hitchPos.x)
+            playerGO.GetComponent<Player>().Turn(false);
+        else
+            playerGO.GetComponent<Player>().Turn(true);
+
         tongue.GetComponent<Tongue>().Hook(this, hitchPos);
     }
 

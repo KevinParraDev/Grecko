@@ -16,6 +16,14 @@ public class Tongue : MonoBehaviour
         _lineTongue.enabled = false;
     }
 
+    public void SetInitialPosition(bool lookAtRight)
+    {
+        if(lookAtRight)
+            _lineTongue.SetPosition(0, new Vector3(-0.3f, 0.55f, 0));
+        else
+            _lineTongue.SetPosition(0, new Vector3(0.3f, 0.55f, 0));
+    }
+
     public void Hook(Hitch hitch, Vector3 hitchPosition)
     {
         _playerTF.gameObject.GetComponent<Animator>().SetBool("TongueHook", true);
@@ -28,10 +36,10 @@ public class Tongue : MonoBehaviour
 
     private IEnumerator TongueShot(Vector3 hitchPosition)
     {
-        for (int i = 1; i < 5; i++)
+        for (int i = 1; i < 10; i++)
         {
             _lineTongue.SetPosition(1, ((hitchPosition - _playerTF.position) * i * 0.1f));
-            yield return new WaitForSecondsRealtime(0.02f);
+            yield return new WaitForSecondsRealtime(0.01f);
         }
         _hook = true;
 
