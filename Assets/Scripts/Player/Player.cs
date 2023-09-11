@@ -24,7 +24,7 @@ public class Player : MonoBehaviour
     [Range(0, 0.3f)] public float smothing;
     [SerializeField] LayerMask groundMask;
     private Vector3 _velocidadZero = Vector3.zero;
-    private bool canMove = true;
+    private bool canMove;
 
     [Header("Jump")]
     [SerializeField] private float timeJumpSaved;
@@ -43,50 +43,61 @@ public class Player : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         checkpointManager = GetComponent<CheckpointManager>();
         tongue = GetComponentInChildren<Tongue>();
+
+        SetInitialValues();
+    }
+
+    void SetInitialValues()
+    {
+        alive = false;
+        DisableMotion(false);
     }
 
     private void Update()
     {
-        input = playerInput.actions["Move"].ReadValue<Vector2>();
-
-        if (InGround() && alive)
+        if(alive)
         {
-            canJump = true;
-            inCoyoteTime = false;
+            input = playerInput.actions["Move"].ReadValue<Vector2>();
 
-            if (saveJump)
+            if (InGround())
             {
-                saveJump = false;
-                Jump();
-            }
+                canJump = true;
+                inCoyoteTime = false;
 
-            if (falling)
-            {
-                falling = false;
-                anim.SetTrigger("Arrive");
-            }
-        }
-        else
-        {
-            if (!inCoyoteTime)
-            {
-                inCoyoteTime = true;
-                StartCoroutine(CoyoteTime());
-            }
+                if (saveJump)
+                {
+                    saveJump = false;
+                    Jump();
+                }
 
-            if (rb.velocity.y < 0 && falling == false)
-            {
-                falling = true;
-                anim.SetTrigger("Fall");
+                if (falling)
+                {
+                    falling = false;
+                    anim.SetTrigger("Arrive");
+                }
             }
+            else
+            {
+                if (!inCoyoteTime)
+                {
+                    inCoyoteTime = true;
+                    StartCoroutine(CoyoteTime());
+                }
 
-            if (rb.velocity.y > 0)
-            {
-                platformCollider.isTrigger = true;
-            }
-            else if (rb.velocity.y <= 0)
-            {
-                platformCollider.isTrigger = false;
+                if (rb.velocity.y < 0 && falling == false)
+                {
+                    falling = true;
+                    anim.SetTrigger("Fall");
+                }
+
+                if (rb.velocity.y > 0)
+                {
+                    platformCollider.isTrigger = true;
+                }
+                else if (rb.velocity.y <= 0)
+                {
+                    platformCollider.isTrigger = false;
+                }
             }
         }
     }
@@ -158,14 +169,14 @@ public class Player : MonoBehaviour
 
     public void Kill()
     {
-        DisableMotion(true);
+        DisableMotion(false);
         alive = false;
         anim.SetTrigger("Death");
     }
 
     public void Revive()
     {
-        Debug.Log("Revivir");
+        DisableMotion(true);
         alive = true;
     }
 

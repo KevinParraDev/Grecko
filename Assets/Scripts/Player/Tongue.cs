@@ -57,7 +57,7 @@ public class Tongue : MonoBehaviour
                 _lineTongue.enabled = false;
                 _playerTF.gameObject.GetComponent<Animator>().SetBool("TongueHook", false);
                 _hook = false;
-                _hitch.Impulse(18);
+                _hitch.Impulse(1);
                 _hitch.DisableMotion();
             }
         }

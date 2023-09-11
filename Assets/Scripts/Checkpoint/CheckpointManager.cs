@@ -11,8 +11,12 @@ public class CheckpointManager : MonoBehaviour
     {
         if (other.gameObject.CompareTag("Checkpoint"))
         {
-            if (other.gameObject.GetComponent<Checkpoint>().order > actualOrder)
+            int newOrder = other.gameObject.GetComponent<Checkpoint>().order;
+            if (newOrder > actualOrder)
+            {
+                actualOrder = newOrder;
                 SaveCheckpoint(other.transform.GetComponent<Checkpoint>().pointToAppear);
+            }
         }
     }
 

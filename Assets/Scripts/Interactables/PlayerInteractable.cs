@@ -32,7 +32,7 @@ public class PlayerInteractable : MonoBehaviour
                if (HasInteractablesInRange)
                {
                     // De momento interactua con el primero detectado, luego hacer por rango?
-                    _interactablesInRange[0].Interact();
+                    _interactablesInRange[_interactablesInRange.Count - 1].Interact();
                }
           }
      }
