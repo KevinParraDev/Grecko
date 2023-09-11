@@ -63,7 +63,6 @@ public class Player : MonoBehaviour
         }
         else
         {
-            Debug.Log("No suelo");
             if (!inCoyoteTime)
             {
                 inCoyoteTime = true;
@@ -78,12 +77,10 @@ public class Player : MonoBehaviour
 
             if (rb.velocity.y > 0)
             {
-                Debug.Log("Desactivar collider");
                 platformCollider.isTrigger = true;
             }
             else if (rb.velocity.y <= 0)
             {
-                Debug.Log("Activar collider");
                 platformCollider.isTrigger = false;
             }
         }
@@ -130,7 +127,6 @@ public class Player : MonoBehaviour
         // Si está en el suelo salta, si no, llama a guardar salto, lo cual hará que salte si toca el suelo en un corto tiempo
         if (callbackContext.performed && canJump)
         {
-            Debug.Log("Saltar");
             rb.velocity = new Vector2(rb.velocity.x, 0f);
             rb.AddForce(new Vector2(0, jumpHeight));
             anim.SetTrigger("Jump");
@@ -144,10 +140,21 @@ public class Player : MonoBehaviour
     // Este salto se llama cuando tiene un salto guardado
     private void Jump()
     {
-        Debug.Log("Salto guardado");
         rb.velocity = new Vector2(rb.velocity.x, 0f);
         rb.AddForce(new Vector2(0, jumpHeight));
         anim.SetTrigger("Jump");
+    }
+
+    public void Kill()
+    {
+        DisableMotion(true);
+        anim.SetTrigger("Death");
+    }
+
+    public void Revive()
+    {
+        Debug.Log("Revivir");
+        transform.position = new Vector2(-5.5f, -0.5f);
     }
 
     // Para comprobar si esta en una plataforma movible

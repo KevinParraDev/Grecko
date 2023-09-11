@@ -4,9 +4,9 @@ using System.Collections.Generic;
 using Unity.VisualScripting;
 using UnityEngine;
 
-public class Bullet : Killer
+public class Bullet : MonoBehaviour
 {
-     
+
      public float speed { get; set; }
 
      [SerializeField]
@@ -43,7 +43,7 @@ public class Bullet : Killer
           // Es mejor usar un trigger collider para matar al player
           if (collision.transform.CompareTag("Player"))
           {
-               KillPlayer();
+               //KillPlayer();
                DestroyBullet();
           }
      }

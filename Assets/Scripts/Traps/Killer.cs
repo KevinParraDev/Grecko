@@ -2,18 +2,25 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public abstract class Killer : MonoBehaviour
+public class Killer : MonoBehaviour
 {
-     private void OnCollisionEnter2D(Collision2D collision)
+     protected void OnCollisionEnter2D(Collision2D collision)
      {
+          Debug.Log("Mataaaaaar");
           if (collision.transform.CompareTag("Player"))
           {
-               KillPlayer();
+               Debug.Log("Mataaaaaar 2");
+               if (collision.transform.TryGetComponent<Player>(out Player player))
+               {
+                    Debug.Log("Mataaaaaar 2.5");
+                    KillPlayer(collision.gameObject.GetComponent<Player>());
+               }
           }
      }
 
-     protected void KillPlayer()
+     protected void KillPlayer(Player player)
      {
-          // Player.Kill();
+          Debug.Log("Mataaaaaar 3");
+          player.Kill();
      }
 }
