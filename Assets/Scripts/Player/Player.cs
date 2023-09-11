@@ -9,9 +9,11 @@ public class Player : MonoBehaviour
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider;
     private SpriteRenderer spriteRenderer;
+    private CheckpointManager checkpointManager;
     private Animator anim;
     private PlayerInput playerInput;
     private Vector2 input;
+    private bool alive = true;
 
     [SerializeField] private CompositeCollider2D platformCollider;
 
@@ -38,13 +40,14 @@ public class Player : MonoBehaviour
         spriteRenderer = GetComponent<SpriteRenderer>();
         anim = GetComponent<Animator>();
         playerInput = GetComponent<PlayerInput>();
+        checkpointManager = GetComponent<CheckpointManager>();
     }
 
     private void Update()
     {
         input = playerInput.actions["Move"].ReadValue<Vector2>();
 
-        if (InGround())
+        if (InGround() && alive)
         {
             canJump = true;
             inCoyoteTime = false;
@@ -148,13 +151,19 @@ public class Player : MonoBehaviour
     public void Kill()
     {
         DisableMotion(true);
+        alive = false;
         anim.SetTrigger("Death");
     }
 
     public void Revive()
     {
         Debug.Log("Revivir");
-        transform.position = new Vector2(-5.5f, -0.5f);
+        alive = true;
+    }
+
+    public void LoadCheckpoint()
+    {
+        transform.position = checkpointManager.lastCheckpoint.position;
     }
 
     // Para comprobar si esta en una plataforma movible
