@@ -5,9 +5,9 @@ using UnityEngine.SceneManagement;
 
 public class LevelManager : MonoBehaviour
 {
-     private int _currentLevel;
+     private int _currentLevel = 1;
 
-     private int _currentWorld;
+     private int _currentWorld = 1;
 
      private int _maxLevelsInWorlds = 5;
 
@@ -30,16 +30,20 @@ public class LevelManager : MonoBehaviour
           
      }
 
-     public int CurrentLevel
+     private void HandleLevelChange(int World, int level)
      {
-          get { return _currentLevel; }
-          set { _currentLevel = value; }
-     }
+          // De esta forma se deben nombrar las escenas de niveles
+          string sceneName = "World" + World + "_Level" + level;
 
-     public int CurrentWorld
-     {
-          get { return _currentWorld; }
-          set { _currentWorld = value; }
+          // Se puede realizar una corrutina en caso de querer alguna pantalla de carga
+          if (SceneManager.GetSceneByName(sceneName) != null )
+          {
+               SceneManager.LoadScene(sceneName);
+          }
+          else
+          {
+               // TODO: Implementar escena de fin de nivel
+          }
      }
 
      public void LoadNextLevel()
@@ -60,15 +64,18 @@ public class LevelManager : MonoBehaviour
 
      public void LoadLevel(int World, int level)
      {
-          HandleLevelChange(level, World);
+          HandleLevelChange(World, level);
      }
 
-     private void HandleLevelChange(int World, int level)
+     public int CurrentLevel
      {
-          // De esta forma se deben nombrar las escenas de niveles
-          string sceneName = "World" + World + "_Level" + level;
+          get { return _currentLevel; }
+          set { _currentLevel = value; }
+     }
 
-          // Se puede realizar una corrutina en caso de querer alguna pantalla de carga
-          SceneManager.LoadScene(sceneName);
+     public int CurrentWorld
+     {
+          get { return _currentWorld; }
+          set { _currentWorld = value; }
      }
 }

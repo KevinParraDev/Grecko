@@ -8,4 +8,19 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Tests K.unity
     guid: 2cda990e2423bbf4892e6590ba056729
+  - enabled: 1
+    path: Assets/Scenes/Levels/World1/World1_Level1.unity
+    guid: 9a34e69c5fa41b342bb817e3ea29b1dc
+  - enabled: 1
+    path: Assets/Scenes/Levels/World1/World1_Level2.unity
+    guid: a3162206f19218a4db31726a008cc78c
+  - enabled: 1
+    path: Assets/Scenes/Levels/World1/World1_Level3.unity
+    guid: 324013dd213cbd24c9585eb30a908520
+  - enabled: 1
+    path: Assets/Scenes/Levels/World1/World1_Level4.unity
+    guid: 42a985ee4bb060348b4ad41f6a575a7c
+  - enabled: 1
+    path: Assets/Scenes/Levels/World1/World1_Level5.unity
+    guid: 55928370853be574dbce95cc6bd9c0cf
   m_configObjects: {}
