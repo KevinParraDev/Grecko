@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 2bc593834b8a1ef49a608c136cd0bddf
+guid: 6defc0eb6f4ce684ea84a1b3bb36a947
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Proyectil_Trap_H_0
+      name: Proyectil_Trap_V_Alter_0
       rect:
         serializedVersion: 2
         x: 0
@@ -119,14 +119,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: ed15e72db4abdce44a946bff851ca376
-      internalID: 610464915
+      spriteID: 067be2e0fb5154b4d99763d3bd92862d
+      internalID: -2142940499
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Proyectil_Trap_H_1
+      name: Proyectil_Trap_V_Alter_1
       rect:
         serializedVersion: 2
         x: 32
@@ -140,14 +140,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 68db1a4a513c36040a39c274a1209c8d
-      internalID: -731139686
+      spriteID: 7136779bacb12cf4e900b57e90001595
+      internalID: -694030370
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Proyectil_Trap_H_2
+      name: Proyectil_Trap_V_Alter_2
       rect:
         serializedVersion: 2
         x: 64
@@ -161,14 +161,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0ee689626a36bce4db342cc51c7a0bd3
-      internalID: -1210336504
+      spriteID: 0b1def959cb893040a8471fe16780488
+      internalID: -420880160
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Proyectil_Trap_H_3
+      name: Proyectil_Trap_V_Alter_3
       rect:
         serializedVersion: 2
         x: 96
@@ -182,14 +182,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 142cc4b8d7738be4da6664686ca7c4db
-      internalID: 1345304789
+      spriteID: 10d0257b0b8439f4f8c9ffcd99a2f3cd
+      internalID: 1351171207
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Proyectil_Trap_H_4
+      name: Proyectil_Trap_V_Alter_4
       rect:
         serializedVersion: 2
         x: 0
@@ -203,14 +203,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 79a239f586e1ba347a0c210b63b7ebfc
-      internalID: 1052789395
+      spriteID: 1529a13af22841b4e9030bf02d9c26ba
+      internalID: -1441075370
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Proyectil_Trap_V_0
+      name: Proyectil_Trap_H_Alter_0
       rect:
         serializedVersion: 2
         x: 32
@@ -224,14 +224,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 64aed2692f9e842479c04dd49fe1d887
-      internalID: 1423887379
+      spriteID: f2b33088e9896674ba92b3e756bfefae
+      internalID: 564703919
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Proyectil_Trap_V_1
+      name: Proyectil_Trap_H_Alter_1
       rect:
         serializedVersion: 2
         x: 64
@@ -245,14 +245,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5320f427f6aeb9d4ba14d12bde069cdc
-      internalID: -1186900002
+      spriteID: f36d86f8ebdc1024dba72890cdc2af41
+      internalID: 1698731352
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Proyectil_Trap_V_2
+      name: Proyectil_Trap_H_Alter_2
       rect:
         serializedVersion: 2
         x: 96
@@ -266,14 +266,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 420449561de953d4aa5b290de6fb9e17
-      internalID: 1204204338
+      spriteID: 41a3e2af53c9d4d47aae2e6dd94fdf85
+      internalID: 1538385167
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Proyectil_Trap_V_3
+      name: Proyectil_Trap_H_Alter_3
       rect:
         serializedVersion: 2
         x: 0
@@ -287,14 +287,14 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: d6990275ccfe07644bf24701a0d57a4a
-      internalID: -243687039
+      spriteID: 34a587425e0ac4643b02d1aca357bbe0
+      internalID: -384533713
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Proyectil_Trap_V_4
+      name: Proyectil_Trap_H_Alter_4
       rect:
         serializedVersion: 2
         x: 32
@@ -308,8 +308,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5c4018946a8b14f4bb6b203537d8f06e
-      internalID: -78668538
+      spriteID: cf8b536274a91374fa0e381aed129ef4
+      internalID: 1042891134
       vertices: []
       indices: 
       edges: []
@@ -325,16 +325,16 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Proyectil_Trap_H_0: 610464915
-      Proyectil_Trap_H_1: -731139686
-      Proyectil_Trap_H_2: -1210336504
-      Proyectil_Trap_H_3: 1345304789
-      Proyectil_Trap_H_4: 1052789395
-      Proyectil_Trap_V_0: 1423887379
-      Proyectil_Trap_V_1: -1186900002
-      Proyectil_Trap_V_2: 1204204338
-      Proyectil_Trap_V_3: -243687039
-      Proyectil_Trap_V_4: -78668538
+      Proyectil_Trap_H_Alter_0: 564703919
+      Proyectil_Trap_H_Alter_1: 1698731352
+      Proyectil_Trap_H_Alter_2: 1538385167
+      Proyectil_Trap_H_Alter_3: -384533713
+      Proyectil_Trap_H_Alter_4: 1042891134
+      Proyectil_Trap_V_Alter_0: -2142940499
+      Proyectil_Trap_V_Alter_1: -694030370
+      Proyectil_Trap_V_Alter_2: -420880160
+      Proyectil_Trap_V_Alter_3: 1351171207
+      Proyectil_Trap_V_Alter_4: -1441075370
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

@@ -106,7 +106,11 @@ public class Player : MonoBehaviour
     {
         if (canMove)
             Move();
-    }
+        else
+        {
+             rb.velocity = Vector2.zero;
+        }
+     }
 
     // Detecta si el jugador está tocando el suelo
     private bool InGround()
@@ -140,7 +144,7 @@ public class Player : MonoBehaviour
 
     public void DisableMotion(bool e)
     {
-        canMove = e;
+          canMove = e;
     }
 
     // Este salto se llama desde el Input System
