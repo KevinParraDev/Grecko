@@ -11,8 +11,9 @@ public class MovingObject : MonoBehaviour, IActivable
      [SerializeField]
      [Range(0f, 0.1f)]
      private float _speed;
+
      [SerializeField]
-     private bool inMovement;
+     private bool _active;
 
      [Space(10)]
      [SerializeField]
@@ -37,7 +38,7 @@ public class MovingObject : MonoBehaviour, IActivable
      {
           _platformSpriteRenderer = _platform.GetComponent<SpriteRenderer>();
 
-          if (inMovement)
+          if (_active)
           {
 
                ChangeSprite(_platformSpriteRenderer, _activeSpriteObject);
@@ -53,15 +54,26 @@ public class MovingObject : MonoBehaviour, IActivable
 
      private void FixedUpdate()
      {
-          if(inMovement)
+          if(_active)
           {
                Move();
           }
      }
 
+     public virtual void Switch()
+     {
+          if (_active)
+          {
+               Deactivate();
+          } else
+          {
+               Activate();
+          }
+     }
+
      public virtual void Activate()
      {
-          inMovement = true;
+          _active = true;
           ChangeSprite(_platformSpriteRenderer, _activeSpriteObject);
 
           foreach (Transform t in _wayPoints)
@@ -73,7 +85,7 @@ public class MovingObject : MonoBehaviour, IActivable
 
      public virtual void Deactivate()
      {
-          inMovement = false;
+          _active = false;
           ChangeSprite(_platformSpriteRenderer, _inactiveSpriteObject);
 
           foreach (Transform t in _wayPoints)

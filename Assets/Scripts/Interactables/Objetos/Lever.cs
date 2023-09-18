@@ -5,8 +5,7 @@ using UnityEngine;
 
 public class Lever : InteractableObject
 {
-     private bool _active = false;
-
+ 
      [SerializeField]
      private List<GameObject> _objectsToActive;
 
@@ -19,37 +18,17 @@ public class Lever : InteractableObject
           {
                StartAnimation();
 
-               // Si no esta activo se activa con los elemento y viceversa
-
-               if (!_active)
+               foreach (GameObject obj in _objectsToActive)
                {
-                    foreach (GameObject obj in _objectsToActive)
-                    {
-                         ActivateObject(obj);
-                    }
-
-                    _active = true;
-               }
-               else
-               {
-                    foreach (GameObject obj in _objectsToActive)
-                    {
-                         DeactiveObject(obj);
-                    }
-
-                    _active = false;
-               }
-                      
+                    ActivateObject(obj);
+               }          
           }
      }
 
      private void ActivateObject(GameObject obj)
      {
-          
           if (obj.TryGetComponent(out IActivable _elementToActive))
-               _elementToActive.Activate();
-           
-          
+               _elementToActive.Switch();
      }
 
      private void DeactiveObject(GameObject obj)

@@ -66,6 +66,17 @@ public class ProyectileTrap : MonoBehaviour, IActivable
           }   
      }
 
+     public virtual void Switch()
+     {
+          if (_TrapIsActive)
+          {
+               Deactivate();
+          }
+          else
+          {
+               Activate();
+          }
+     }
      public virtual void Activate()
      {
           _TrapIsActive = true;
