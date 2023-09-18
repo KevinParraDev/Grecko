@@ -21,8 +21,35 @@ public class MovingObject : MonoBehaviour, IActivable
      // flag de direccionamiento del movimiento
      private int _indexWayPoint;
 
-     
+     [Header("Sprites")]
+     [SerializeField]
+     private Sprite _activeSpriteObject;
+     [SerializeField]
+     private Sprite _inactiveSpriteObject;
+     [SerializeField]
+     private Sprite _activeSpritePoint;
+     [SerializeField]
+     private Sprite _inactiveSpritePoint;
 
+     private SpriteRenderer _platformSpriteRenderer;
+
+     private void Start()
+     {
+          _platformSpriteRenderer = _platform.GetComponent<SpriteRenderer>();
+
+          if (inMovement)
+          {
+
+               ChangeSprite(_platformSpriteRenderer, _activeSpriteObject);
+
+               foreach (Transform t in _wayPoints)
+               {
+                    if(t.TryGetComponent<SpriteRenderer>(out SpriteRenderer _rendererPoint))
+                         ChangeSprite(_rendererPoint, _activeSpritePoint);
+               }
+          }
+               
+     }
 
      private void FixedUpdate()
      {
@@ -35,11 +62,31 @@ public class MovingObject : MonoBehaviour, IActivable
      public virtual void Activate()
      {
           inMovement = true;
+          ChangeSprite(_platformSpriteRenderer, _activeSpriteObject);
+
+          foreach (Transform t in _wayPoints)
+          {
+               if (t.TryGetComponent<SpriteRenderer>(out SpriteRenderer _rendererPoint))
+                    ChangeSprite(_rendererPoint, _activeSpritePoint);
+          }
      }
 
      public virtual void Deactivate()
      {
           inMovement = false;
+          ChangeSprite(_platformSpriteRenderer, _inactiveSpriteObject);
+
+          foreach (Transform t in _wayPoints)
+          {
+               if (t.TryGetComponent<SpriteRenderer>(out SpriteRenderer _rendererPoint))
+                    ChangeSprite(_rendererPoint, _inactiveSpritePoint);
+          }
+     }
+
+     private void ChangeSprite(SpriteRenderer _objToChange, Sprite newSprite)
+     {
+          if (_objToChange != null)
+               _objToChange.sprite = newSprite;
      }
 
      private void Move()
