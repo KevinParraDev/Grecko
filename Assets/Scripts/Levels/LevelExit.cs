@@ -11,22 +11,19 @@ public class LevelExit : MonoBehaviour
     {
           if (collision.CompareTag("Player"))
           {
-               StartCoroutine(EndLevel());
-               if(_player != null)
-                    _player.gameObject.SetActive(false);
+               if(TryGetComponent<Animator>(out Animator anim))
+               {
+                    anim.SetTrigger("PortalIn");
+
+                    if (_player != null)
+                         _player.gameObject.SetActive(false);
+               }
+                    
           } 
     }
 
-     IEnumerator EndLevel()
+     public void EndLevel()
      {
-          if (transform.TryGetComponent(out Animator anim))
-          {
-               anim.SetTrigger("PortalIn");
-
-               // Ejecutar mientras la animación está en proceso
-               yield return new WaitForSeconds(1.3f);
-          }
-
           LevelManager.Instance.LoadNextLevel();
      }
 }

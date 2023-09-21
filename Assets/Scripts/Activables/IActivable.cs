@@ -4,6 +4,8 @@ using UnityEngine;
 
 public interface IActivable {
 
+     void Switch();
+
      void Activate();
 
      void Deactivate();

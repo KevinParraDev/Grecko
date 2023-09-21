@@ -105,7 +105,7 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Interactables_0
+      name: Interactables_Icon
       rect:
         serializedVersion: 2
         x: 0
@@ -113,7 +113,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0, y: 0}
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -126,15 +126,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Interactables_1
+      name: Interactables_Lever_0
       rect:
         serializedVersion: 2
         x: 32
-        y: 64
+        y: 71
         width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 17
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -147,15 +147,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Interactables_2
+      name: Interactables_Lever_1
       rect:
         serializedVersion: 2
         x: 64
-        y: 64
+        y: 71
         width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 17
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -168,15 +168,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Interactables_3
+      name: Interactables_Lever_2
       rect:
         serializedVersion: 2
         x: 0
-        y: 32
+        y: 39
         width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 15
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -189,15 +189,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Interactables_4
+      name: Interactables_Lever_3
       rect:
         serializedVersion: 2
         x: 32
-        y: 32
+        y: 39
         width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 15
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -210,15 +210,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Interactables_5
+      name: Interactables_Lever_4
       rect:
         serializedVersion: 2
         x: 64
-        y: 32
+        y: 39
         width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 15
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -231,15 +231,15 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Interactables_6
+      name: Interactables_Lever_5
       rect:
         serializedVersion: 2
         x: 0
-        y: 0
+        y: 7
         width: 32
-        height: 32
-      alignment: 0
-      pivot: {x: 0, y: 0}
+        height: 17
+      alignment: 7
+      pivot: {x: 0.5, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -262,13 +262,13 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Interactables_0: -1891819682
-      Interactables_1: -363992509
-      Interactables_2: 207343995
-      Interactables_3: -1815448888
-      Interactables_4: -17502632
-      Interactables_5: -1151737893
-      Interactables_6: -163237352
+      Interactables_Icon: -1891819682
+      Interactables_Lever_0: -363992509
+      Interactables_Lever_1: 207343995
+      Interactables_Lever_2: -1815448888
+      Interactables_Lever_3: -17502632
+      Interactables_Lever_4: -1151737893
+      Interactables_Lever_5: -163237352
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0

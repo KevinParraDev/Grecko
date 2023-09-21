@@ -11,8 +11,9 @@ public class MovingObject : MonoBehaviour, IActivable
      [SerializeField]
      [Range(0f, 0.1f)]
      private float _speed;
+
      [SerializeField]
-     private bool inMovement;
+     private bool _active;
 
      [Space(10)]
      [SerializeField]
@@ -21,25 +22,83 @@ public class MovingObject : MonoBehaviour, IActivable
      // flag de direccionamiento del movimiento
      private int _indexWayPoint;
 
-     
+     [Header("Sprites")]
+     [SerializeField]
+     private Sprite _activeSpriteObject;
+     [SerializeField]
+     private Sprite _inactiveSpriteObject;
+     [SerializeField]
+     private Sprite _activeSpritePoint;
+     [SerializeField]
+     private Sprite _inactiveSpritePoint;
 
+     private SpriteRenderer _platformSpriteRenderer;
+
+     private void Start()
+     {
+          _platformSpriteRenderer = _platform.GetComponent<SpriteRenderer>();
+
+          if (_active)
+          {
+
+               ChangeSprite(_platformSpriteRenderer, _activeSpriteObject);
+
+               foreach (Transform t in _wayPoints)
+               {
+                    if(t.TryGetComponent<SpriteRenderer>(out SpriteRenderer _rendererPoint))
+                         ChangeSprite(_rendererPoint, _activeSpritePoint);
+               }
+          }
+               
+     }
 
      private void FixedUpdate()
      {
-          if(inMovement)
+          if(_active)
           {
                Move();
           }
      }
 
+     public virtual void Switch()
+     {
+          if (_active)
+          {
+               Deactivate();
+          } else
+          {
+               Activate();
+          }
+     }
+
      public virtual void Activate()
      {
-          inMovement = true;
+          _active = true;
+          ChangeSprite(_platformSpriteRenderer, _activeSpriteObject);
+
+          foreach (Transform t in _wayPoints)
+          {
+               if (t.TryGetComponent<SpriteRenderer>(out SpriteRenderer _rendererPoint))
+                    ChangeSprite(_rendererPoint, _activeSpritePoint);
+          }
      }
 
      public virtual void Deactivate()
      {
-          inMovement = false;
+          _active = false;
+          ChangeSprite(_platformSpriteRenderer, _inactiveSpriteObject);
+
+          foreach (Transform t in _wayPoints)
+          {
+               if (t.TryGetComponent<SpriteRenderer>(out SpriteRenderer _rendererPoint))
+                    ChangeSprite(_rendererPoint, _inactiveSpritePoint);
+          }
+     }
+
+     private void ChangeSprite(SpriteRenderer _objToChange, Sprite newSprite)
+     {
+          if (_objToChange != null)
+               _objToChange.sprite = newSprite;
      }
 
      private void Move()
