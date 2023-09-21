@@ -4,6 +4,7 @@ using UnityEngine;
 
 public class Hitch : InteractableObject
 {
+    [SerializeField] private Animator anim;
     [SerializeField] private GameObject playerGO;
     [SerializeField] private Rigidbody2D playerRB;
     [SerializeField] private GameObject tongue;
@@ -43,6 +44,11 @@ public class Hitch : InteractableObject
 
     public void Impulse(float multiply)
     {
+        if (multiply == 1)
+            anim.SetBool("hook", false);
+        else
+            anim.SetBool("hook", true);
+
         playerRB.velocity = new Vector2(0, 0);
         playerRB.velocity = dir * impulseForce * multiply;
         playerRB.gravityScale = 0;

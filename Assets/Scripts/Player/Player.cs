@@ -55,7 +55,7 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
-        if(alive)
+        if (alive)
         {
             input = playerInput.actions["Move"].ReadValue<Vector2>();
 
@@ -106,11 +106,7 @@ public class Player : MonoBehaviour
     {
         if (canMove)
             Move();
-        else
-        {
-             rb.velocity = Vector2.zero;
-        }
-     }
+    }
 
     // Detecta si el jugador está tocando el suelo
     private bool InGround()
@@ -144,7 +140,7 @@ public class Player : MonoBehaviour
 
     public void DisableMotion(bool e)
     {
-          canMove = e;
+        canMove = e;
     }
 
     // Este salto se llama desde el Input System
@@ -176,6 +172,9 @@ public class Player : MonoBehaviour
         DisableMotion(false);
         alive = false;
         anim.SetTrigger("Death");
+        GetComponent<BoxCollider2D>().enabled = false;
+        rb.velocity = Vector2.zero;
+        rb.gravityScale = 0;
     }
 
     public void Revive()
@@ -187,6 +186,9 @@ public class Player : MonoBehaviour
     public void LoadCheckpoint()
     {
         transform.position = checkpointManager.lastCheckpoint.position;
+
+        GetComponent<BoxCollider2D>().enabled = true;
+        rb.gravityScale = 3;
     }
 
     // Para comprobar si esta en una plataforma movible
