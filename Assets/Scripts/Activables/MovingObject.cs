@@ -13,11 +13,11 @@ public class MovingObject : MonoBehaviour, IActivable
      private float _speed;
 
      [SerializeField]
-     private bool _active;
+     protected bool _active;
 
      [Space(10)]
      [SerializeField]
-     private GameObject _platform;
+     protected GameObject _platform;
 
      // flag de direccionamiento del movimiento
      private int _indexWayPoint;
