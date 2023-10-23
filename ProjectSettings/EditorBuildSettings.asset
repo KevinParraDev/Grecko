@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Tests K.unity
     guid: 2cda990e2423bbf4892e6590ba056729
   - enabled: 1
+    path: Assets/Scenes/Home.unity
+    guid: 46f2e44640d3f914b9b39ad6a0d915ae
+  - enabled: 1
     path: Assets/Scenes/Levels/World1/World1_Level1.unity
     guid: 9a34e69c5fa41b342bb817e3ea29b1dc
   - enabled: 1
