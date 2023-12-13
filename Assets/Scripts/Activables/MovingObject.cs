@@ -32,16 +32,17 @@ public class MovingObject : MonoBehaviour, IActivable
      [SerializeField]
      private Sprite _inactiveSpritePoint;
 
-     private SpriteRenderer _platformSpriteRenderer;
+     private Animator _platformAnimator;
 
      private void Start()
      {
-          _platformSpriteRenderer = _platform.GetComponent<SpriteRenderer>();
+          _platformAnimator = _platform.GetComponent<Animator>();
 
           if (_active)
           {
 
-               ChangeSprite(_platformSpriteRenderer, _activeSpriteObject);
+               if (_platformAnimator)
+                    _platformAnimator.SetBool("isActive", true);
 
                foreach (Transform t in _wayPoints)
                {
@@ -60,6 +61,7 @@ public class MovingObject : MonoBehaviour, IActivable
           }
      }
 
+     // Virtual permite usar un override en una clase derivada de esta (como la de Trap_Saw) para modificar este metodo
      public virtual void Switch()
      {
           if (_active)
@@ -74,7 +76,8 @@ public class MovingObject : MonoBehaviour, IActivable
      public virtual void Activate()
      {
           _active = true;
-          ChangeSprite(_platformSpriteRenderer, _activeSpriteObject);
+          if (_platformAnimator)
+               _platformAnimator.SetBool("isActive", true);
 
           foreach (Transform t in _wayPoints)
           {
@@ -86,7 +89,8 @@ public class MovingObject : MonoBehaviour, IActivable
      public virtual void Deactivate()
      {
           _active = false;
-          ChangeSprite(_platformSpriteRenderer, _inactiveSpriteObject);
+          if (_platformAnimator)
+               _platformAnimator.SetBool("isActive", false);
 
           foreach (Transform t in _wayPoints)
           {

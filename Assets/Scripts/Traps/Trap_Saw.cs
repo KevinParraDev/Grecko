@@ -4,14 +4,21 @@ using UnityEngine;
 
 public class Trap_Saw : MovingObject
 {
-     private float _speed = 1f;
+     [SerializeField]
+     private CircleCollider2D _sawCollider;
 
      // Update is called once per frame
-     void Update()
-    {
-        if (this._active)
-          {
-               this._platform.transform.Rotate(0, 0, 360 * _speed * Time.deltaTime);
-          }
-    }
+     public override void Activate()
+     {
+          base.Activate();
+
+          if (_sawCollider) _sawCollider.enabled = true;
+     }
+
+     public override void Deactivate()
+     {
+          base.Deactivate();
+
+          if (_sawCollider) _sawCollider.enabled = false;
+     }
 }
