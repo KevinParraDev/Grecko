@@ -25,6 +25,7 @@ public class Player : MonoBehaviour
     [SerializeField] LayerMask groundMask;
     private Vector3 _velocidadZero = Vector3.zero;
     private bool canMove;
+    public int direction = 1;
 
     [Header("Jump")]
     [SerializeField] private float timeJumpSaved;
@@ -33,6 +34,25 @@ public class Player : MonoBehaviour
     private bool saveJump;
     private bool inCoyoteTime;
     private bool canJump;
+
+    public static Player Instance;
+
+    private void Awake()
+    {
+        if (Instance == null)
+        {
+            Instance = this;
+
+            // No destruir el LM durante el cambio de escenas
+            DontDestroyOnLoad(this);
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
+
+
+    }
 
     void Start()
     {
@@ -49,8 +69,8 @@ public class Player : MonoBehaviour
 
     void SetInitialValues()
     {
-        alive = false;
-        DisableMotion(false);
+        alive = true;
+        DisableMotion(true);
     }
 
     private void Update()
@@ -90,13 +110,16 @@ public class Player : MonoBehaviour
                     anim.SetTrigger("Fall");
                 }
 
-                if (rb.velocity.y > 0)
+                if(platformCollider != null)
                 {
-                    platformCollider.isTrigger = true;
-                }
-                else if (rb.velocity.y <= 0)
-                {
-                    platformCollider.isTrigger = false;
+                    if (rb.velocity.y > 0)
+                    {
+                        platformCollider.isTrigger = true;
+                    }
+                    else if (rb.velocity.y <= 0)
+                    {
+                        platformCollider.isTrigger = false;
+                    }
                 }
             }
         }
@@ -121,9 +144,9 @@ public class Player : MonoBehaviour
         Vector3 velocidadFinal = new Vector2(input.x * runSpeed, rb.velocity.y);
         rb.velocity = Vector3.SmoothDamp(rb.velocity, velocidadFinal, ref _velocidadZero, smothing);
 
-        if (input.x < 0)
+        if (input.x < 0 & direction == 1)
             Turn(true);
-        else if (input.x > 0)
+        else if (input.x > 0 & direction == -1)
             Turn(false);
 
         if (input.x != 0 && canJump)
@@ -134,7 +157,11 @@ public class Player : MonoBehaviour
 
     public void Turn(bool lookAtRight)
     {
-        spriteRenderer.flipX = lookAtRight;
+        Debug.Log("Girar");
+        //spriteRenderer.flipX = lookAtRight;
+        direction *= -1;
+        transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + 180, 0);
+
         tongue.SetInitialPosition(lookAtRight);
     }
 
@@ -160,7 +187,7 @@ public class Player : MonoBehaviour
     }
 
     // Este salto se llama cuando tiene un salto guardado
-    private void Jump()
+    public void Jump()
     {
         rb.velocity = new Vector2(rb.velocity.x, 0f);
         rb.AddForce(new Vector2(0, jumpHeight));

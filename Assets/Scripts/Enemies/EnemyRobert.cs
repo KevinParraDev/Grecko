@@ -2,9 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum StateTypeRobert { Patrol, Turn, Search, Chase, Death }
+public enum StateTypeRobert { Patrol, Turn, Search, Chase, Death, Damage }
 
-public class EnemyRobert : MonoBehaviour
+public class EnemyRobert : DamageableEntiti
 {
     public StateTypeRobert stateType;
     private Rigidbody2D rb;
@@ -12,6 +12,7 @@ public class EnemyRobert : MonoBehaviour
 
     private bool alive = true;
     private bool inDelayToSearch;
+    private bool canBound = true;
     [SerializeField] private int direction = -1;
     [SerializeField] private float patrolSpeed;
     [SerializeField] private float chaseSpeed;
@@ -23,8 +24,20 @@ public class EnemyRobert : MonoBehaviour
     [SerializeField] private CollisionDetector weakPoint;
 
     // Rycast
-    private RaycastHit2D rI1, rI2, rD1, rD2;
+    private RaycastHit2D rycastPared, rycastSuelo;
     [SerializeField] private LayerMask capaSuelo;
+
+    public override void TakeDamage()
+    {
+        StartCoroutine(knockback());
+    }
+
+    IEnumerator knockback()
+    {
+        ChangeState(StateTypeRobert.Damage);
+        yield return new WaitForSeconds(0.5f);
+        ChangeState(StateTypeRobert.Chase);
+    }
 
     private void ChangeState(StateTypeRobert newState)
     {
@@ -47,6 +60,9 @@ public class EnemyRobert : MonoBehaviour
             case StateTypeRobert.Death:
                 Death();
                 break;
+            case StateTypeRobert.Damage:
+                Damage();
+                break;
         }
     }
 
@@ -68,8 +84,20 @@ public class EnemyRobert : MonoBehaviour
     {
         if(alive)
         {
-            if (weakPoint.isTouching == true)
-                ChangeState(StateTypeRobert.Death);
+            DetectEnvironment();
+
+            if (weakPoint.isTouching == true & canBound)
+            {
+                canBound = false;
+                Debug.Log("Pisoton");
+                Player.Instance.Jump();
+                Damage(2);
+            }
+
+            if(canBound == false & weakPoint.isTouching == false)
+                canBound = true;
+
+            //ChangeState(StateTypeRobert.Death);
 
             if (stateType == StateTypeRobert.Patrol)
             {
@@ -77,8 +105,6 @@ public class EnemyRobert : MonoBehaviour
 
                 if (alertZone.isTouching == true)
                     ChangeState(StateTypeRobert.Search);
-
-                DetectEnvironment();
             }
             else if (stateType == StateTypeRobert.Chase)
             {
@@ -86,31 +112,55 @@ public class EnemyRobert : MonoBehaviour
 
                 if (alertZone.isTouching == false && !inDelayToSearch)
                     StartCoroutine(DelayToSearchAgain());
+
+                if (backZone.isTouching == true)
+                    ChangeState(StateTypeRobert.Search);
             }
         }
     }
 
     private void DetectEnvironment()
     {
-        Debug.DrawRay(transform.position, Vector2.left * 1f, Color.red);
-        Debug.DrawRay(transform.position + new Vector3(direction * 0.4f, 0, 0), Vector2.down * 1f, Color.red);
-        rI1 = Physics2D.Raycast(transform.position, Vector2.left, 1f, capaSuelo);
-        rI2 = Physics2D.Raycast(transform.position + new Vector3(direction * 0.4f, 0,0), Vector2.down, 1f, capaSuelo);
+        
+        if(direction == -1)
+        {
+            Debug.DrawRay(transform.position, Vector2.left * 1f, Color.red);
+            rycastPared = Physics2D.Raycast(transform.position, Vector2.left, 1f, capaSuelo);
+        }
+        else
+        {
+            Debug.DrawRay(transform.position, Vector2.right * 1f, Color.red);
+            rycastPared = Physics2D.Raycast(transform.position, Vector2.right, 1f, capaSuelo);
+        }
 
-        if (!rI2)
-            ChangeState(StateTypeRobert.Turn);
+        Debug.DrawRay(transform.position + new Vector3(direction * 0.4f, 0, 0), Vector2.down * 1f, Color.red);
+        rycastSuelo = Physics2D.Raycast(transform.position + new Vector3(direction * 0.4f, 0,0), Vector2.down, 1f, capaSuelo);
+
+        if (!rycastSuelo | rycastPared)
+        {
+            Debug.Log("Rotar: " + rycastPared + " - " + rycastSuelo.ToString());
+            if (stateType == StateTypeRobert.Patrol)
+                ChangeState(StateTypeRobert.Turn);
+            else if (stateType == StateTypeRobert.Chase)
+                ChangeState(StateTypeRobert.Turn);
+        }
     }
 
     // Estados
     private void Patrol()
     {
-        Debug.Log("Patrullar");
         anim.SetTrigger("Patrol");
+    }
+
+    private void Damage()
+    {
+        rb.velocity = Vector2.zero;
+        rb.AddForce( Vector3.Normalize(Player.Instance.transform.position - transform.position) * -300 );
+        ChangeState(StateTypeRobert.Patrol);
     }
 
     private void Turn()
     {
-        Debug.Log("Girar");
         rb.velocity = Vector2.zero;
         direction *= -1;
         transform.localScale = new Vector2(-direction, 1);
@@ -120,19 +170,16 @@ public class EnemyRobert : MonoBehaviour
 
     private void Search()
     {
-        Debug.Log("Buscar");
-
         anim.SetTrigger("Search");
         rb.velocity = Vector2.zero;
     }
 
     private void Chase()
     {
-        Debug.Log("Perseguir");
         anim.SetTrigger("Chase");
     }
 
-    private void Death()
+    public override void Death()
     {
         alive = false;
         rb.velocity = Vector2.zero;
@@ -142,16 +189,18 @@ public class EnemyRobert : MonoBehaviour
     }
     private void ChooseDirection()
     {
-        if (alertZone.isTouching == true)
-            ChangeState(StateTypeRobert.Chase);
-        else if (backZone.isTouching == true)
+
+        if ((Player.Instance.transform.position.x > transform.position.x & direction == -1) | (Player.Instance.transform.position.x < transform.position.x & direction == 1))
         {
             direction *= -1;
             transform.localScale = new Vector2(-direction, 1);
             ChangeState(StateTypeRobert.Chase);
         }
+
         else
-            ChangeState(StateTypeRobert.Patrol);
+        {
+            ChangeState(StateTypeRobert.Chase);
+        }
     }
 
     IEnumerator DelayToSearchAgain()
@@ -160,7 +209,6 @@ public class EnemyRobert : MonoBehaviour
         yield return new WaitForSeconds(0.5f);
         if(alertZone.isTouching == false)
         {
-            Debug.Log("Repeticiones");
             ChangeState(StateTypeRobert.Search);
         }
         inDelayToSearch = false;
