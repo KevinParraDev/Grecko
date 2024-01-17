@@ -1,0 +1,31 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3299f5bcdcd51ef40aa351a2bce478ae, type: 3}
+  m_Name: Library
+  m_EditorClassIdentifier: 
+  music: []
+  soundGroups:
+  - groupID: Door_Open
+    clips:
+    - {fileID: 8300000, guid: eb8055ecd69be3c4dae0777c9e76c077, type: 3}
+  - groupID: Portal_Active
+    clips:
+    - {fileID: 8300000, guid: 2a058da8c0e9c7c47929c1cafad6897c, type: 3}
+  - groupID: Lever_Interact
+    clips:
+    - {fileID: 8300000, guid: 35673556812a50240b2254a295b5d305, type: 3}
+  - groupID: Bullet_Impact
+    clips:
+    - {fileID: 8300000, guid: 53e90698cc8242b489b92614fe94f79e, type: 3}
+  - groupID: Cannon_Shot
+    clips:
+    - {fileID: 8300000, guid: 837ca8b1a174b024f8948a50439eea8e, type: 3}

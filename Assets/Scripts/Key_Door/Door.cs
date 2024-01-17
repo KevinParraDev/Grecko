@@ -9,6 +9,7 @@ public class Door : MonoBehaviour, IActivable
      {
           if (TryGetComponent(out Animator anim))
           {
+               AudioManager.Instance.PlaySound2D("Door_Open");
                anim.SetTrigger("Open");
           }
 
