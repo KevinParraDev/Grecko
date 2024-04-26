@@ -12,7 +12,6 @@ public class CombatManager : MonoBehaviour
     {
         if (callbackContext.performed)
         {
-            Debug.Log("Atacar");
             Collider2D[] hitEnemies = Physics2D.OverlapCircleAll(attackZone.position, hitRange);
             
             foreach (Collider2D enemy in hitEnemies)
@@ -20,7 +19,6 @@ public class CombatManager : MonoBehaviour
                 if (enemy.GetComponent<DamageableEntiti>() != null)
                 {
                     enemy.GetComponent<DamageableEntiti>().Damage(2);
-                    Debug.Log("Encontro Enemigo");
                 }
             }
         }

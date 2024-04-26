@@ -155,7 +155,7 @@ public class EnemyRobert : DamageableEntiti
     private void Damage()
     {
         rb.velocity = Vector2.zero;
-        rb.AddForce( Vector3.Normalize(Player.Instance.transform.position - transform.position) * -300 );
+        rb.AddForce( Vector3.Normalize(Player.Instance.transform.position - transform.position) * -100 );
         ChangeState(StateTypeRobert.Patrol);
     }
 
@@ -183,6 +183,7 @@ public class EnemyRobert : DamageableEntiti
     {
         alive = false;
         rb.velocity = Vector2.zero;
+        rb.simulated = false;
         attackZone.gameObject.SetActive(false);
         gameObject.layer = LayerMask.NameToLayer("DeathEnemy");
         anim.SetTrigger("Death");

@@ -5,9 +5,8 @@ using UnityEngine;
 public class Hitch : InteractableObject
 {
     [SerializeField] private Animator anim;
-    [SerializeField] private GameObject playerGO;
-    [SerializeField] private Rigidbody2D playerRB;
     [SerializeField] private GameObject tongue;
+    [SerializeField] private Rigidbody2D playerRB;
     [SerializeField] private float impulseForce;
     [SerializeField] private float delay;
     private bool canUse = true;
@@ -20,10 +19,10 @@ public class Hitch : InteractableObject
             canUse = false;
             Vector2 hitchPos = transform.position;
 
-            if (playerGO.transform.position.x <= hitchPos.x)
-                playerGO.GetComponent<Player>().Turn(false);
-            else
-                playerGO.GetComponent<Player>().Turn(true);
+            if (Player.Instance.transform.position.x < hitchPos.x && Player.Instance.direction == -1)
+                Player.Instance.GetComponent<Player>().Turn(false);
+            else if (Player.Instance.transform.position.x > hitchPos.x && Player.Instance.direction == 1)
+                Player.Instance.GetComponent<Player>().Turn(true);
 
             tongue.GetComponent<Tongue>().Hook(this, hitchPos);
         }
@@ -32,12 +31,12 @@ public class Hitch : InteractableObject
     public void HitchShot()
     {
         Vector2 hitchPos = transform.position;
-        Vector2 playerPos = playerGO.transform.position;
+        Vector2 playerPos = Player.Instance.transform.position;
 
         dir = (hitchPos - playerPos).normalized;
-        playerRB = playerGO.GetComponent<Rigidbody2D>();
+        playerRB = Player.Instance.GetComponent<Rigidbody2D>();
         playerRB.gravityScale = 0;
-        playerGO.GetComponent<Player>().DisableMotion(false);
+        Player.Instance.DisableMotion(false);
 
         Impulse(1.5f);
     }
@@ -64,6 +63,6 @@ public class Hitch : InteractableObject
     {
         yield return new WaitForSeconds(delay);
         canUse = true;
-        playerGO.GetComponent<Player>().DisableMotion(true);
+        Player.Instance.DisableMotion(true);
     }
 }

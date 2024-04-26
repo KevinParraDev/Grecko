@@ -14463,7 +14463,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 519420028}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -0.15423203, y: 0.26189, z: -10}
+  m_LocalPosition: {x: -0.14495945, y: 0.26161003, z: -10}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -17145,6 +17145,10 @@ MonoBehaviour:
         m_CallState: 2
     m_ActionId: 29f432ba-365d-4bcd-9762-d81f3189902d
     m_ActionName: Player/Interact[/Keyboard/e]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 91aa0611-90b4-4070-9f55-d9672e4ec0cb
+    m_ActionName: Player/Atack[/Keyboard/j,/Keyboard/x]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Player
@@ -17164,11 +17168,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   platformCollider: {fileID: 1641645362}
   runSpeed: 7
-  jumpHeight: 500
+  jumpHeight: 600
   smothing: 0.1
   groundMask:
     serializedVersion: 2
     m_Bits: 64
+  direction: 1
   timeJumpSaved: 0.2
   coyoteTime: 0.05
 --- !u!61 &1061113061
@@ -20822,43 +20827,43 @@ CompositeCollider2D:
   - m_Collider: {fileID: 1641645363}
     m_ColliderPaths:
     - - X: 120000000
-        Y: 5000000
+        Y: 10000000
       - X: 100000000
-        Y: 5000000
+        Y: 10000000
       - X: 100000000
-        Y: 2500000
+        Y: 7500000
       - X: 120000000
-        Y: 2500000
+        Y: 7500000
     - - X: 180000000
-        Y: -5000000
+        Y: 0
       - X: 170000000
-        Y: -5000000
+        Y: 0
       - X: 170000000
-        Y: -7500000
+        Y: -2500000
       - X: 180000000
-        Y: -7500000
+        Y: -2500000
     - - X: 0
-        Y: -15000000
+        Y: -10000000
       - X: -10000000
-        Y: -15000000
+        Y: -10000000
       - X: -10000000
-        Y: -17500000
+        Y: -12500000
       - X: 0
-        Y: -17500000
+        Y: -12500000
   m_CompositePaths:
     m_Paths:
-    - - {x: 11.99997, y: 0.25}
-      - {x: 11.99997, y: 0.5}
-      - {x: 10, y: 0.4999707}
-      - {x: 10.00003, y: 0.25}
-    - - {x: 17.999971, y: -0.75}
-      - {x: 17.999971, y: -0.5}
-      - {x: 17, y: -0.5000293}
-      - {x: 17.000029, y: -0.75}
-    - - {x: -0.000029300001, y: -1.75}
-      - {x: -0.000029300001, y: -1.5}
-      - {x: -1, y: -1.5000293}
-      - {x: -0.99997073, y: -1.75}
+    - - {x: 11.99997, y: 0.75}
+      - {x: 11.99997, y: 1}
+      - {x: 10, y: 0.99997073}
+      - {x: 10.00003, y: 0.75}
+    - - {x: 17.999971, y: -0.25}
+      - {x: 17.999971, y: 0}
+      - {x: 17, y: -0.000029300001}
+      - {x: 17.000029, y: -0.25}
+    - - {x: -0.000029300001, y: -1.25}
+      - {x: -0.000029300001, y: -1}
+      - {x: -1, y: -1.0000293}
+      - {x: -0.99997073, y: -1.25}
   m_VertexDistance: 0.0005
   m_OffsetDistance: 0.00005
 --- !u!19719996 &1641645363

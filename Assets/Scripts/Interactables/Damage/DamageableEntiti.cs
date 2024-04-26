@@ -5,9 +5,9 @@ using UnityEngine;
 public abstract class DamageableEntiti : MonoBehaviour
 {
     // Start is called before the first frame update
-    [SerializeField] private float TotalLifePoits = 5;
-    private float ActualLifePoits;
-    public GameObject playerGO;
+    public float TotalLifePoits = 5;
+    public float ActualLifePoits;
+    private bool damageable = true;
 
     private void Awake()
     {
@@ -19,7 +19,7 @@ public abstract class DamageableEntiti : MonoBehaviour
 
     public void Damage(float damageForce)
     {
-        if(ActualLifePoits > 0)
+        if (ActualLifePoits > 0 & damageable)
         {
             TakeDamage();
             if (ActualLifePoits - damageForce >= 0)
@@ -33,4 +33,13 @@ public abstract class DamageableEntiti : MonoBehaviour
             Debug.Log("Vida restante: " + ActualLifePoits);
         }
     }
+
+    private IEnumerator Invincibilidy()
+    {
+        damageable = false;
+        yield return new WaitForSeconds(0.2f);
+        damageable = true;
+    }
+
+
 }

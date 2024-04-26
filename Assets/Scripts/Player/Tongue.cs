@@ -18,10 +18,10 @@ public class Tongue : MonoBehaviour
 
     public void SetInitialPosition(bool lookAtRight)
     {
-        if(lookAtRight)
-            _lineTongue.SetPosition(0, new Vector3(-0.3f, 0.55f, 0));
-        else
+        if(Player.Instance.direction == 1)
             _lineTongue.SetPosition(0, new Vector3(0.3f, 0.55f, 0));
+        else
+            _lineTongue.SetPosition(0, new Vector3(-0.3f, 0.55f, 0));
     }
 
     public void Hook(Hitch hitch, Vector3 hitchPosition)
@@ -51,7 +51,7 @@ public class Tongue : MonoBehaviour
         if (_hook)
         {
             if (Vector2.Distance(_hitchPosition, _playerTF.position) >= 1)
-                _lineTongue.SetPosition(1, _hitchPosition - _playerTF.position);
+                _lineTongue.SetPosition(1, (_hitchPosition - _playerTF.position));
             else
             {
                 _lineTongue.enabled = false;

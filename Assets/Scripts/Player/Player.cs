@@ -4,7 +4,7 @@ using Unity.VisualScripting;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Player : MonoBehaviour
+public class Player : DamageableEntiti
 {
     private Rigidbody2D rb;
     private BoxCollider2D boxCollider;
@@ -56,6 +56,7 @@ public class Player : MonoBehaviour
 
     void Start()
     {
+        ActualLifePoits = TotalLifePoits;
         rb = GetComponent<Rigidbody2D>();
         boxCollider = GetComponent<BoxCollider2D>();
         spriteRenderer = GetComponent<SpriteRenderer>();
@@ -157,11 +158,10 @@ public class Player : MonoBehaviour
 
     public void Turn(bool lookAtRight)
     {
-        Debug.Log("Girar");
         //spriteRenderer.flipX = lookAtRight;
         direction *= -1;
         transform.eulerAngles = new Vector3(0, transform.eulerAngles.y + 180, 0);
-
+        tongue.gameObject.transform.localScale = new Vector2(direction,1);
         tongue.SetInitialPosition(lookAtRight);
     }
 
@@ -194,7 +194,22 @@ public class Player : MonoBehaviour
         anim.SetTrigger("Jump");
     }
 
-    public void Kill()
+    public override void TakeDamage()
+    {
+        Debug.Log("Recibir daño");
+        StartCoroutine(knockback());
+    }
+
+    IEnumerator knockback()
+    {
+        DisableMotion(true);
+        rb.velocity = Vector2.zero;
+        rb.AddForce(Vector2.right * 100);
+        yield return new WaitForSeconds(0.5f);
+        DisableMotion(false);
+    }
+
+    public override void Death()
     {
         DisableMotion(false);
         alive = false;

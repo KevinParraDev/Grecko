@@ -27,6 +27,6 @@ public class Killer : MonoBehaviour
 
      protected void KillPlayer(Player player)
      {
-          player.Kill();
+          player.Death();
      }
 }
