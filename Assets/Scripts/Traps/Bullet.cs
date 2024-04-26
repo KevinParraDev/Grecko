@@ -14,9 +14,13 @@ public class Bullet : MonoBehaviour
 
      private Animator _anim;
 
+     private AudioSource _audioSource;
+
      private void Start()
      {
           _anim = GetComponentInChildren<Animator>();
+
+          _audioSource = GetComponent<AudioSource>();
      }
 
      private void FixedUpdate()
@@ -34,6 +38,11 @@ public class Bullet : MonoBehaviour
 
           if (hit.collider != null)
           {
+               //AudioManager.Instance.PlaySound2D("Bullet_Impact");
+               if (_audioSource != null)
+               {
+                    _audioSource.Play();
+               }
                DestroyBullet();
           }
      }

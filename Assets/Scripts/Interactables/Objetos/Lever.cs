@@ -16,6 +16,7 @@ public class Lever : InteractableObject
     {
           if (_objectsToActive.Count > 0 && !_isInAnimation)
           {
+               AudioManager.Instance.PlaySound2D("Lever_Interact");
                StartAnimation();
 
                foreach (GameObject obj in _objectsToActive)

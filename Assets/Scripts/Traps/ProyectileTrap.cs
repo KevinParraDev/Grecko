@@ -25,6 +25,8 @@ public class ProyectileTrap : MonoBehaviour, IActivable
 
      private float _timeRemainigInitial;
 
+     private AudioSource _audioSource;
+
      private Animator _anim;
 
      private void Start()
@@ -32,6 +34,8 @@ public class ProyectileTrap : MonoBehaviour, IActivable
           _timeRemainigInitial = _shootTimeRemaining;
 
           _anim = GetComponent<Animator>();
+
+          _audioSource = GetComponent<AudioSource>();
      }
 
      private void Update()
@@ -56,6 +60,12 @@ public class ProyectileTrap : MonoBehaviour, IActivable
           if (_anim != null)
           {
                _anim.SetTrigger("Shoot");
+          }
+
+          //AudioManager.Instance.PlaySound2D("Cannon_Shot");
+          if(_audioSource!= null)
+          {
+               _audioSource.Play();
           }
 
           GameObject bullet = _pool.RequestBullet();
