@@ -19,6 +19,7 @@ public class EnemyRobert : DamageableEntiti
 
     // Colliders
     [SerializeField] private CollisionDetector alertZone;
+    [SerializeField] private CollisionDetector unFollowZone;
     [SerializeField] private CollisionDetector backZone;
     [SerializeField] private CollisionDetector attackZone;
     [SerializeField] private CollisionDetector weakPoint;
@@ -27,15 +28,17 @@ public class EnemyRobert : DamageableEntiti
     private RaycastHit2D rycastPared, rycastSuelo;
     [SerializeField] private LayerMask capaSuelo;
 
-    public override void TakeDamage()
+    public override void TakeDamage(Vector3 damageDir)
     {
-        StartCoroutine(knockback());
+        Debug.Log("Damage");
+        rb.velocity = Vector2.zero;
+        rb.AddForce(Vector3.Normalize(transform.position - damageDir) * 10, ForceMode2D.Impulse);
+        StartCoroutine(DelayKnockback());
     }
 
-    IEnumerator knockback()
+    IEnumerator DelayKnockback()
     {
-        ChangeState(StateTypeRobert.Damage);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSecondsRealtime(0.5f);
         ChangeState(StateTypeRobert.Chase);
     }
 
@@ -59,9 +62,6 @@ public class EnemyRobert : DamageableEntiti
                 break;
             case StateTypeRobert.Death:
                 Death();
-                break;
-            case StateTypeRobert.Damage:
-                Damage();
                 break;
         }
     }
@@ -91,7 +91,7 @@ public class EnemyRobert : DamageableEntiti
                 canBound = false;
                 Debug.Log("Pisoton");
                 Player.Instance.Jump();
-                Damage(2);
+                Damage(2, transform.position);
             }
 
             if(canBound == false & weakPoint.isTouching == false)
@@ -101,17 +101,17 @@ public class EnemyRobert : DamageableEntiti
 
             if (stateType == StateTypeRobert.Patrol)
             {
-                rb.velocity = new Vector2(direction * patrolSpeed, 0);
+                rb.velocity = new Vector2(direction * patrolSpeed, rb.velocity.y);
 
                 if (alertZone.isTouching == true)
                     ChangeState(StateTypeRobert.Search);
             }
             else if (stateType == StateTypeRobert.Chase)
             {
-                rb.velocity = new Vector2(direction * chaseSpeed, 0);
+                rb.velocity = new Vector2(direction * chaseSpeed, rb.velocity.y);
 
-                if (alertZone.isTouching == false && !inDelayToSearch)
-                    StartCoroutine(DelayToSearchAgain());
+                if (unFollowZone.isTouching == false && !inDelayToSearch)
+                    ChangeState(StateTypeRobert.Search);
 
                 if (backZone.isTouching == true)
                     ChangeState(StateTypeRobert.Search);
@@ -152,13 +152,6 @@ public class EnemyRobert : DamageableEntiti
         anim.SetTrigger("Patrol");
     }
 
-    private void Damage()
-    {
-        rb.velocity = Vector2.zero;
-        rb.AddForce( Vector3.Normalize(Player.Instance.transform.position - transform.position) * -100 );
-        ChangeState(StateTypeRobert.Patrol);
-    }
-
     private void Turn()
     {
         rb.velocity = Vector2.zero;
@@ -188,19 +181,24 @@ public class EnemyRobert : DamageableEntiti
         gameObject.layer = LayerMask.NameToLayer("DeathEnemy");
         anim.SetTrigger("Death");
     }
-    private void ChooseDirection()
+    public void ChooseDirection()
     {
-
-        if ((Player.Instance.transform.position.x > transform.position.x & direction == -1) | (Player.Instance.transform.position.x < transform.position.x & direction == 1))
+        if(unFollowZone.isTouching == true)
         {
-            direction *= -1;
-            transform.localScale = new Vector2(-direction, 1);
-            ChangeState(StateTypeRobert.Chase);
+            if ((Player.Instance.transform.position.x > transform.position.x & direction == -1) | (Player.Instance.transform.position.x < transform.position.x & direction == 1))
+            {
+                direction *= -1;
+                transform.localScale = new Vector2(-direction, 1);
+                ChangeState(StateTypeRobert.Chase);
+            }
+            else
+            {
+                ChangeState(StateTypeRobert.Chase);
+            }
         }
-
         else
         {
-            ChangeState(StateTypeRobert.Chase);
+            ChangeState(StateTypeRobert.Patrol);
         }
     }
 

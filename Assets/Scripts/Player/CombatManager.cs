@@ -18,7 +18,7 @@ public class CombatManager : MonoBehaviour
             {
                 if (enemy.GetComponent<DamageableEntiti>() != null)
                 {
-                    enemy.GetComponent<DamageableEntiti>().Damage(2);
+                    enemy.GetComponent<DamageableEntiti>().Damage(2, transform.position);
                 }
             }
         }

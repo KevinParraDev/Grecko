@@ -14,14 +14,14 @@ public abstract class DamageableEntiti : MonoBehaviour
         ActualLifePoits = TotalLifePoits;
     }
 
-    public abstract void TakeDamage();
+    public abstract void TakeDamage(Vector3 damageDir);
     public abstract void Death();
 
-    public void Damage(float damageForce)
+    public void Damage(float damageForce, Vector3 damageDir)
     {
         if (ActualLifePoits > 0 & damageable)
         {
-            TakeDamage();
+            TakeDamage(damageDir);
             if (ActualLifePoits - damageForce >= 0)
                 ActualLifePoits -= damageForce;
             else
@@ -30,6 +30,7 @@ public abstract class DamageableEntiti : MonoBehaviour
                 Death();
                 Debug.Log("Entidad Muerta");
             }
+            StartCoroutine(Invincibilidy());
             Debug.Log("Vida restante: " + ActualLifePoits);
         }
     }

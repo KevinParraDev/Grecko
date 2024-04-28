@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class RobertDamage : DamageableEntiti
 {
-    public override void TakeDamage()
+    public override void TakeDamage(Vector3 damageDi)
     {
         Debug.Log("Daño");
 

@@ -83,6 +83,7 @@ public class IARobert : DamageableEntiti
             direction *= -1;
             transform.localScale = new Vector2(-direction, 1);
             ChangeVelocity();
+            StartCoroutine(StopMovement(0.2f));
         }
     }
 
@@ -128,12 +129,14 @@ public class IARobert : DamageableEntiti
     private void Chase()
     {
         speed = chaseSpeed;
+        StartCoroutine(StopMovement(0.4f));
     }
 
     private void Atack()
     {
         Debug.Log("Atacar");
-        Player.Instance.Damage(2);
+        Player.Instance.Damage(2, transform.position);
+        StartCoroutine(StopMovement(0.2f));
     }
 
     public override void Death()
@@ -143,11 +146,23 @@ public class IARobert : DamageableEntiti
         
     }
 
-    public override void TakeDamage()
+    IEnumerator StopMovement(float stopTime)
+    {
+        Debug.Log("Detener");
+        float auxSpeed = speed;
+        speed = 0;
+        ChangeVelocity();
+        yield return new WaitForSecondsRealtime(stopTime);
+        speed = auxSpeed;
+        ChangeVelocity();
+        Debug.Log("Restaurar movimiento");
+    }
+
+    public override void TakeDamage(Vector3 damageDir)
     {
         Debug.Log("Damage");
         rb.velocity = Vector2.zero;
-        rb.AddForce(Vector3.Normalize(transform.position - Player.Instance.transform.position) * knockbackForce, ForceMode2D.Impulse);
+        rb.AddForce(Vector3.Normalize(transform.position - damageDir) * knockbackForce, ForceMode2D.Impulse);
         StartCoroutine(DelayKnockback());
     }
 

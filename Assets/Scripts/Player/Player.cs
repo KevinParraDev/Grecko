@@ -194,18 +194,18 @@ public class Player : DamageableEntiti
         anim.SetTrigger("Jump");
     }
 
-    public override void TakeDamage()
+    public override void TakeDamage(Vector3 damageDir)
     {
-        Debug.Log("Recibir daño");
-        StartCoroutine(knockback());
+        Debug.Log("Damage");
+        rb.velocity = Vector2.zero;
+        DisableMotion(true);
+        rb.AddForce(Vector3.Normalize(transform.position - damageDir) * 15, ForceMode2D.Impulse);
+        StartCoroutine(DelayKnockback());
     }
 
-    IEnumerator knockback()
+    IEnumerator DelayKnockback()
     {
-        DisableMotion(true);
-        rb.velocity = Vector2.zero;
-        rb.AddForce(Vector2.right * 100);
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSecondsRealtime(0.2f);
         DisableMotion(false);
     }
 
