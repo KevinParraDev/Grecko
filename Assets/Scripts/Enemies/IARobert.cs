@@ -2,17 +2,19 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum StateRobert { Patrol = 0, Chase = 1, Atack = 2, Death = 3}
+public enum StateRobert { Patrol = 0, Chase = 1, Atack = 2, Death = 3, Search =4}
 
 public class IARobert : DamageableEntiti
 {
     public StateRobert stateType;
     private Rigidbody2D rb;
+    private Animator anim;
 
     private float distance;
     private bool alive;
     private float speed;
     private int direction;
+    public bool endClip;
 
     [SerializeField] private float knockbackForce;
     [SerializeField] private float patrolSpeed;
@@ -29,8 +31,9 @@ public class IARobert : DamageableEntiti
     private void Start()
     {
         alive = true;
-        direction = 1;
+        direction = -1;
         rb = GetComponent<Rigidbody2D>();
+        anim = GetComponent<Animator>();
         ChangeState(StateRobert.Patrol);
         ChangeVelocity();
     }
@@ -47,14 +50,14 @@ public class IARobert : DamageableEntiti
             {
                 ChangeState(StateRobert.Atack);
             }
-            else if(distance < alertRange && stateType != StateRobert.Chase)
+            else if(distance < alertRange && stateType != StateRobert.Chase && stateType != StateRobert.Search)
             {
-                ChangeState(StateRobert.Chase);
+                ChangeState(StateRobert.Search);
                 ChangeVelocity();
             }
-            else if(distance > unFollowRange && stateType != StateRobert.Patrol)
+            else if(distance > unFollowRange && stateType != StateRobert.Patrol && stateType != StateRobert.Search)
             {
-                ChangeState(StateRobert.Patrol);
+                ChangeState(StateRobert.Search);
                 ChangeVelocity();
             }
         }
@@ -82,8 +85,9 @@ public class IARobert : DamageableEntiti
             rb.velocity = Vector2.zero;
             direction *= -1;
             transform.localScale = new Vector2(-direction, 1);
+            anim.SetTrigger("Turn");
             ChangeVelocity();
-            StartCoroutine(StopMovement(0.2f));
+            StartCoroutine(StopMovement("Turn"));
         }
     }
 
@@ -118,44 +122,65 @@ public class IARobert : DamageableEntiti
             case StateRobert.Death:
                 Death();
                 break;
+            case StateRobert.Search:
+                Search();
+                break;
         }
     }
 
     private void Patrol()
     {
         speed = patrolSpeed;
+        Debug.Log("Patrol");
+        anim.SetTrigger("Patrol");
     }
 
     private void Chase()
     {
         speed = chaseSpeed;
-        StartCoroutine(StopMovement(0.4f));
+        anim.SetTrigger("Chase");
+        ChangeVelocity();
     }
 
     private void Atack()
     {
         Debug.Log("Atacar");
         Player.Instance.Damage(2, transform.position);
-        StartCoroutine(StopMovement(0.2f));
     }
 
     public override void Death()
     {
+        anim.SetTrigger("Death");
         GetComponent<SpriteRenderer>().color = Color.red;
         alive = false;
         
     }
 
-    IEnumerator StopMovement(float stopTime)
+    private void Search()
     {
-        Debug.Log("Detener");
+        StartCoroutine(StopMovement("Search"));
+    }
+
+    public void EndClipAnim()
+    {
+        endClip = true;
+    }
+
+    IEnumerator StopMovement(string clip)
+    {
         float auxSpeed = speed;
         speed = 0;
         ChangeVelocity();
-        yield return new WaitForSecondsRealtime(stopTime);
+        endClip = false;
+        anim.SetTrigger(clip);
+        yield return new WaitWhile(() => endClip == false);
         speed = auxSpeed;
         ChangeVelocity();
-        Debug.Log("Restaurar movimiento");
+
+        if (clip == "Search" && distance < alertRange)
+            ChangeState(StateRobert.Chase);
+        else if (clip == "Search" && distance > alertRange)
+            ChangeState(StateRobert.Patrol);
     }
 
     public override void TakeDamage(Vector3 damageDir)

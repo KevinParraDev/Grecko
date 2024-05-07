@@ -293,6 +293,7 @@ GameObject:
   - component: {fileID: 561912142}
   - component: {fileID: 561912143}
   - component: {fileID: 561912144}
+  - component: {fileID: 561912145}
   m_Layer: 0
   m_Name: Square
   m_TagString: Untagged
@@ -341,7 +342,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: -1
-  m_Sprite: {fileID: 7482667652216324306, guid: 311925a002f4447b3a28927169b83ea6, type: 3}
+  m_Sprite: {fileID: -672766165, guid: 0ca3a4449cd80d14da9f15ff417d3797, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -360,7 +361,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 561912138}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 2.04, y: -1.52, z: 0}
+  m_LocalPosition: {x: 5.21, y: -1.52, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -382,6 +383,7 @@ MonoBehaviour:
   TotalLifePoits: 5
   ActualLifePoits: 0
   stateType: 0
+  endClip: 0
   knockbackForce: 10
   patrolSpeed: 2
   chaseSpeed: 5
@@ -429,7 +431,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 1, y: 1}
+    oldSize: {x: 2, y: 2}
     newSize: {x: 1, y: 1}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -438,6 +440,26 @@ BoxCollider2D:
   serializedVersion: 2
   m_Size: {x: 1, y: 1}
   m_EdgeRadius: 0
+--- !u!95 &561912145
+Animator:
+  serializedVersion: 5
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 561912138}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: a74fd3e085e2ea442a50dd6eb461ee81, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorStateOnDisable: 0
 --- !u!4 &589941407 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 586815065354690592, guid: b6cab0ac6f7be6042b3b1c2e0129ab59, type: 3}
@@ -2036,6 +2058,7 @@ MonoBehaviour:
   TotalLifePoits: 5
   ActualLifePoits: 0
   stateType: 0
+  endClip: 0
   knockbackForce: 0
   patrolSpeed: 2
   chaseSpeed: 4
