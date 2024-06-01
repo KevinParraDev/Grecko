@@ -7,6 +7,7 @@ public class Key : MonoBehaviour
      [SerializeField]
      private Terminal _terminalToActive;
 
+     // El isCollected puede usarse para la UI o no
      private bool _isCollected = false;
      private Vector3 _initialPosition;
 
