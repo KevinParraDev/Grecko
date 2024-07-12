@@ -18,14 +18,14 @@ public class Bullet : MonoBehaviour
 
      private void Start()
      {
-          _anim = GetComponentInChildren<Animator>();
+        _anim = GetComponentInChildren<Animator>();
 
           _audioSource = GetComponent<AudioSource>();
      }
 
      private void FixedUpdate()
      {
-          Vector3 dir = transform.up;
+        Vector3 dir = transform.up;
           Vector3 movement = dir * speed;
           transform.position += movement;
 
@@ -43,8 +43,10 @@ public class Bullet : MonoBehaviour
                {
                     _audioSource.Play();
                }
-               DestroyBullet();
-          }
+            _anim.SetTrigger("Explode");
+            speed = 0f;
+            //DestroyBullet();
+        }
      }
 
      private void OnCollisionEnter2D(Collision2D collision)
@@ -52,27 +54,30 @@ public class Bullet : MonoBehaviour
           // Es mejor usar un trigger collider para matar al player
           if (collision.transform.CompareTag("Player"))
           {
-               //KillPlayer();
-               DestroyBullet();
-          }
+            //KillPlayer();
+            //DestroyBullet();
+            Debug.Log("detener");
+            speed = 0f;
+            _anim.SetTrigger("Explode");
+        }
      }
 
-     private void DestroyBullet()
+     public void DestroyBullet()
      {
-          speed = 0f;
-          // queda disponible en el Pool
-          StartCoroutine(DestroyOnDelay());
-     }
+        gameObject.SetActive(false);
+        // queda disponible en el Pool
+        //StartCoroutine(DestroyOnDelay());
+    }
 
-     IEnumerator DestroyOnDelay()
-     {
-          if (_anim != null)
-          {
-               _anim.SetTrigger("Explode");
-          }
-          float duracionAnimacion = _anim.GetCurrentAnimatorStateInfo(0).length - 0.5f;
-          yield return new WaitForSeconds(duracionAnimacion);
+     //IEnumerator DestroyOnDelay()
+     //{
+     //     if (_anim != null)
+     //     {
+     //          _anim.SetTrigger("Explode");
+     //     }
+     //     float duracionAnimacion = _anim.GetCurrentAnimatorStateInfo(0).length - 0.5f;
+     //     yield return new WaitForSeconds(duracionAnimacion);
 
-          gameObject.SetActive(false);
-     }
+     //     gameObject.SetActive(false);
+     //}
 }

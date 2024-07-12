@@ -40,7 +40,7 @@ public class ProyectileTrap : MonoBehaviour, IActivable
 
      private void Update()
      {
-          if(_TrapIsActive)
+          /*if(_TrapIsActive)
           {
                if (_shootTimeRemaining < 0)
                {
@@ -51,16 +51,16 @@ public class ProyectileTrap : MonoBehaviour, IActivable
                {
                     _shootTimeRemaining -= Time.deltaTime;
                }
-          }
+          }*/
      }
 
-     private void Shoot(Transform shootPoint)
+     public void Shoot()
      {
           // Triggerea la animacion si la hay
-          if (_anim != null)
-          {
-               _anim.SetTrigger("Shoot");
-          }
+          //if (_anim != null)
+          //{
+          //     _anim.SetTrigger("Shoot");
+          //}
 
           //AudioManager.Instance.PlaySound2D("Cannon_Shot");
           if(_audioSource!= null)
@@ -69,7 +69,7 @@ public class ProyectileTrap : MonoBehaviour, IActivable
           }
 
           GameObject bullet = _pool.RequestBullet();
-          bullet.transform.SetPositionAndRotation(shootPoint.position, shootPoint.rotation);
+          bullet.transform.SetPositionAndRotation(_shootPoint.position, _shootPoint.rotation);
           if (bullet.transform.TryGetComponent(out Bullet bl))
           {
                bl.speed = _bulletSpeed;

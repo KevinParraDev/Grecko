@@ -101,6 +101,30 @@ TextureImporter:
     overridden: 0
     androidETC2FallbackOverride: 0
     forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: Android
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
+  - serializedVersion: 3
+    buildTarget: WebGL
+    maxTextureSize: 2048
+    resizeAlgorithm: 0
+    textureFormat: 4
+    textureCompression: 1
+    compressionQuality: 50
+    crunchedCompression: 0
+    allowsAlphaSplitting: 0
+    overridden: 0
+    androidETC2FallbackOverride: 0
+    forceMaximumCompressionQuality_BC6H_BC7: 0
   spriteSheet:
     serializedVersion: 2
     sprites:
@@ -113,7 +137,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -134,7 +158,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -155,7 +179,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -176,7 +200,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -197,7 +221,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -218,7 +242,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -239,7 +263,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -260,7 +284,7 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
@@ -273,7 +297,7 @@ TextureImporter:
       edges: []
       weights: []
     - serializedVersion: 2
-      name: destructivePlatform_off_0
+      name: destructivePlatform_8
       rect:
         serializedVersion: 2
         x: 0
@@ -281,20 +305,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 5978eda48245d694e8db56c1c78c160e
-      internalID: 98300691
+      spriteID: 01552464a39de6c4aa38bad4bbf48284
+      internalID: 1503083283
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: destructivePlatform_off_1
+      name: destructivePlatform_9
       rect:
         serializedVersion: 2
         x: 32
@@ -302,20 +326,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7cd5c898bd7913c43b56232e8f9ac41e
-      internalID: -347766481
+      spriteID: 66ff8b54fed2dab4892605309f7993c3
+      internalID: 1356172456
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: destructivePlatform_off_2
+      name: destructivePlatform_10
       rect:
         serializedVersion: 2
         x: 64
@@ -323,20 +347,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 01870d929c83af14383ebe10d84c5667
-      internalID: 506573059
+      spriteID: 36b653626a6298640a9d6d517cd53983
+      internalID: -842123410
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: destructivePlatform_off_3
+      name: destructivePlatform_11
       rect:
         serializedVersion: 2
         x: 96
@@ -344,20 +368,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 879cec42839035b409a30800da708bdf
-      internalID: -1516245795
+      spriteID: bbcd9efdab7646d4684b0c16683662f5
+      internalID: 1110136285
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: destructivePlatform_off_4
+      name: destructivePlatform_12
       rect:
         serializedVersion: 2
         x: 0
@@ -365,20 +389,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: bbf229b54b184e04c81b72c5562fbd35
-      internalID: 1089966082
+      spriteID: c53ddf8e19c9814409782caa8f84bed5
+      internalID: 988473613
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: destructivePlatform_off_5
+      name: destructivePlatform_13
       rect:
         serializedVersion: 2
         x: 32
@@ -386,20 +410,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 4daaf04f30201af498672e1ee3b78d5d
-      internalID: 713451220
+      spriteID: d73effacffb4a6946814f7c8bbf30642
+      internalID: -1688895757
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: destructivePlatform_off_6
+      name: destructivePlatform_14
       rect:
         serializedVersion: 2
         x: 64
@@ -407,20 +431,20 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 6f92f45859a14c34089251fe7f0dcdfe
-      internalID: 1578965844
+      spriteID: b1d567c107e054c46b114a3d008a5dd7
+      internalID: -1930251183
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: destructivePlatform_off_7
+      name: destructivePlatform_15
       rect:
         serializedVersion: 2
         x: 96
@@ -428,14 +452,14 @@ TextureImporter:
         width: 32
         height: 32
       alignment: 0
-      pivot: {x: 0.5, y: 0.5}
+      pivot: {x: 0, y: 0}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: e68be647dee282c40afdaaefb069f59d
-      internalID: 861144856
+      spriteID: 2d6d988d74f5ca641b8b47c97a5adf26
+      internalID: -961128321
       vertices: []
       indices: 
       edges: []
@@ -453,20 +477,20 @@ TextureImporter:
     nameFileIdTable:
       destructivePlatform_0: 1275698040
       destructivePlatform_1: 841781228
+      destructivePlatform_10: -842123410
+      destructivePlatform_11: 1110136285
+      destructivePlatform_12: 988473613
+      destructivePlatform_13: -1688895757
+      destructivePlatform_14: -1930251183
+      destructivePlatform_15: -961128321
       destructivePlatform_2: 904663151
       destructivePlatform_3: -38499976
       destructivePlatform_4: -962996325
       destructivePlatform_5: 1881937533
       destructivePlatform_6: 1033551862
       destructivePlatform_7: 653185830
-      destructivePlatform_off_0: 98300691
-      destructivePlatform_off_1: -347766481
-      destructivePlatform_off_2: 506573059
-      destructivePlatform_off_3: -1516245795
-      destructivePlatform_off_4: 1089966082
-      destructivePlatform_off_5: 713451220
-      destructivePlatform_off_6: 1578965844
-      destructivePlatform_off_7: 861144856
+      destructivePlatform_8: 1503083283
+      destructivePlatform_9: 1356172456
   spritePackingTag: 
   pSDRemoveMatte: 0
   pSDShowRemoveMatteOption: 0
