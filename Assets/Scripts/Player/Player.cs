@@ -14,7 +14,7 @@ public class Player : DamageableEntiti
     private PlayerInput playerInput;
     private Tongue tongue;
     private Vector2 input;
-    private bool alive = true;
+    public bool alive = true;
 
     [SerializeField] private CompositeCollider2D platformCollider;
 
@@ -211,9 +211,14 @@ public class Player : DamageableEntiti
 
     public override void Death()
     {
+        StopAllCoroutines();
+        Debug.Log("Morir");
+
         DisableMotion(false);
+        rb.simulated = false;
         alive = false;
-        anim.SetTrigger("Death");
+        tongue.ResetTongue();
+        anim.SetBool("Death", true);
         GetComponent<BoxCollider2D>().enabled = false;
         rb.velocity = Vector2.zero;
         rb.gravityScale = 0;
@@ -222,6 +227,7 @@ public class Player : DamageableEntiti
     public void Revive()
     {
         DisableMotion(true);
+        rb.simulated = true;
         alive = true;
     }
 
@@ -231,6 +237,7 @@ public class Player : DamageableEntiti
 
         GetComponent<BoxCollider2D>().enabled = true;
         rb.gravityScale = 3;
+        anim.SetBool("Death", false);
     }
 
     // Para comprobar si esta en una plataforma movible

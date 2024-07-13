@@ -29,7 +29,7 @@ public class PlayerInteractable : MonoBehaviour
      {
           if (callbackContext.performed)
           {
-               if (HasInteractablesInRange)
+               if (HasInteractablesInRange && Player.Instance.alive)
                {
                     // De momento interactua con el primero detectado, luego hacer por rango?
                     _interactablesInRange[_interactablesInRange.Count - 1].Interact();

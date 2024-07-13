@@ -9,7 +9,7 @@ public class Hitch : InteractableObject
     [SerializeField] private Rigidbody2D playerRB;
     [SerializeField] private float impulseForce;
     [SerializeField] private float delay;
-    private bool canUse = true;
+    public bool canUse = true;
     private Vector2 dir;
 
     public override void Interact()
@@ -24,6 +24,7 @@ public class Hitch : InteractableObject
             else if (Player.Instance.transform.position.x > hitchPos.x && Player.Instance.direction == 1)
                 Player.Instance.GetComponent<Player>().Turn(true);
 
+            Debug.Log("Hook 1");
             tongue.GetComponent<Tongue>().Hook(this, hitchPos);
         }
     }

@@ -18,7 +18,7 @@ public class Tongue : MonoBehaviour
 
     public void SetInitialPosition(bool lookAtRight)
     {
-        if(Player.Instance.direction == 1)
+        if (Player.Instance.direction == 1)
             _lineTongue.SetPosition(0, new Vector3(0.3f, 0.55f, 0));
         else
             _lineTongue.SetPosition(0, new Vector3(-0.3f, 0.55f, 0));
@@ -26,6 +26,7 @@ public class Tongue : MonoBehaviour
 
     public void Hook(Hitch hitch, Vector3 hitchPosition)
     {
+        Debug.Log("Hook 2");
         _playerTF.gameObject.GetComponent<Animator>().SetBool("TongueHook", true);
         _hitch = hitch;
         _lineTongue.enabled = true;
@@ -44,6 +45,16 @@ public class Tongue : MonoBehaviour
         _hook = true;
 
         _hitch.HitchShot();
+    }
+
+    public void ResetTongue()
+    {
+        Debug.Log("Reset tongue");
+        _lineTongue.enabled = false;
+        _hook = false;
+        _playerTF.gameObject.GetComponent<Animator>().SetBool("TongueHook", false);
+        _hitch.canUse = true;
+        StopAllCoroutines();
     }
 
     private void Update()
