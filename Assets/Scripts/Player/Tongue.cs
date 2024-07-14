@@ -49,12 +49,15 @@ public class Tongue : MonoBehaviour
 
     public void ResetTongue()
     {
-        Debug.Log("Reset tongue");
-        _lineTongue.enabled = false;
-        _hook = false;
-        _playerTF.gameObject.GetComponent<Animator>().SetBool("TongueHook", false);
-        _hitch.canUse = true;
-        StopAllCoroutines();
+        if(_hitch != null)
+        {
+            Debug.Log("Reset tongue");
+            _lineTongue.enabled = false;
+            _hook = false;
+            _playerTF.gameObject.GetComponent<Animator>().SetBool("TongueHook", false);
+            _hitch.canUse = true;
+            StopAllCoroutines();
+        }
     }
 
     private void Update()
